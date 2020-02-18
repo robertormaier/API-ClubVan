@@ -24,3 +24,33 @@ C:\Users\Roberto\source\repos\API - ClubVan\club.van.api\bin\Debug\netcoreapp3.0
 C:\Users\Roberto\source\repos\API - ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Sinks.RollingFile.dll
 C:\Users\Roberto\source\repos\API - ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Roberto\source\repos\API - ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.csproj.CopyComplete
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\05 - club.van.startup\appsettings.Development.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\05 - club.van.startup\appsettings.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.exe
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.deps.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.runtimeconfig.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.runtimeconfig.dev.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\club.van.api.pdb
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Extensions.Logging.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Extensions.Logging.File.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Formatting.Compact.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Sinks.Async.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Sinks.File.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Serilog.Sinks.RollingFile.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\staticwebassets\club.van.api.StaticWebAssets.Manifest.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\staticwebassets\club.van.api.StaticWebAssets.xml
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.AssemblyInfoInputs.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.AssemblyInfo.cs
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.RazorTargetAssemblyInfo.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.csproj.CopyComplete
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.pdb
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Microsoft.OpenApi.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.0\club.van.api.MvcApplicationPartsAssemblyInfo.cache

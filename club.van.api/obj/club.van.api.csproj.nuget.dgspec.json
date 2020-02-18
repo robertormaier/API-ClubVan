@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Roberto\\source\\repos\\API - ClubVan\\club.van.api\\club.van.api.csproj": {}
+    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Roberto\\source\\repos\\API - ClubVan\\club.van.api\\club.van.api.csproj": {
+    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Roberto\\source\\repos\\API - ClubVan\\club.van.api\\club.van.api.csproj",
+        "projectUniqueName": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
         "projectName": "club.van.api",
-        "projectPath": "C:\\Users\\Roberto\\source\\repos\\API - ClubVan\\club.van.api\\club.van.api.csproj",
+        "projectPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
         "packagesPath": "C:\\Users\\Roberto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Roberto\\source\\repos\\API - ClubVan\\club.van.api\\obj\\",
+        "outputPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -44,6 +44,10 @@
             "Serilog.Extensions.Logging.File": {
               "target": "Package",
               "version": "[1.1.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             }
           },
           "imports": [
@@ -63,7 +67,7 @@
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.0.1, 3.0.1]"
+              "version": "[3.0.2, 3.0.2]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
@@ -82,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
