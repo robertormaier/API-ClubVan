@@ -1,9 +1,8 @@
-﻿using prmToolkit.NotificationPattern;
-using System;
+﻿using System;
 
 namespace club.van.api.data.Base
 {
-    public abstract class EntidadeBase : Notifiable
+    public abstract class EntidadeBase 
     {
         protected EntidadeBase()
         {

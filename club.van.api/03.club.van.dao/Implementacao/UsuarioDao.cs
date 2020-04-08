@@ -1,29 +1,38 @@
-﻿using club.van.api.dao.Interface;
+﻿using club.van.api.dao.EF;
+using club.van.api.dao.Interface;
 using club.van.api.data;
 using System;
+using System.Linq;
 
 namespace club.van.api.dao.Implementacao
 {
     public class UsuarioDao : IUsuarioDao
     {
+        private readonly ClubVanContext clubVanContext;
+
+        public UsuarioDao(ClubVanContext clubVanContext)
+        {
+            this.clubVanContext = clubVanContext;
+        }
+
         public bool Existe(string email)
         {
-            throw new NotImplementedException();
+            return this.clubVanContext.Usuarios.Any(x => x.Email.Equals(email));
         }
 
         public Usuario Obter(string email, string senha)
         {
-            throw new NotImplementedException();
+            return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Email == email && x.Senha == senha);
         }
 
         public Usuario Obter(Guid id)
         {
-            throw new NotImplementedException();
+            return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Id == id);
         }
 
         public void Salvar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            this.clubVanContext.Usuarios.Add(usuario);
         }
     }
 }

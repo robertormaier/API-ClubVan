@@ -8,6 +8,7 @@ namespace club.van.api.dao.EF.Map
     {
         public void Configure(EntityTypeBuilder<Veiculo> builder)
         {
+            builder.ToTable("VEICULO");
             builder.HasKey(x => x.Id).HasName("ID");
             builder.Property(x => x.Placa).HasColumnName("PLACA").HasMaxLength(50);
             builder.Property(x => x.Modelo).HasColumnName("MODELO").HasMaxLength(50);

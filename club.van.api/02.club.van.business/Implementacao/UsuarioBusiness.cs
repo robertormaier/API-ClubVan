@@ -29,6 +29,8 @@ namespace club.van.api.business.Implementacao
                         usuario.Rota = adicionarUsuarioRequest.Rota;
                     }
                 }
+
+                return null; // apenas para teste
             }
             catch (Exception ex)
             {

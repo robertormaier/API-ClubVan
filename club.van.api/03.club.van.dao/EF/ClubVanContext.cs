@@ -1,4 +1,5 @@
-﻿using club.van.api.data;
+﻿using club.van.api.dao.EF.Map;
+using club.van.api.data;
 using Microsoft.EntityFrameworkCore;
 
 namespace club.van.api.dao.EF
@@ -19,6 +20,13 @@ namespace club.van.api.dao.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new MapEmpresa());
+            modelBuilder.ApplyConfiguration(new MapPerfil());
+            modelBuilder.ApplyConfiguration(new MapRota());
+            modelBuilder.ApplyConfiguration(new MapUsuario());
+            modelBuilder.ApplyConfiguration(new MapVeiculo());
+            modelBuilder.ApplyConfiguration(new MapViagemDias());
+
             base.OnModelCreating(modelBuilder);
         }
     }
