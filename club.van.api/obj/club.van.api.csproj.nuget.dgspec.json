@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rmaier\\Documents\\API-ClubVan\\club.van.api\\club.van.api.csproj": {}
+    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rmaier\\Documents\\API-ClubVan\\club.van.api\\club.van.api.csproj": {
+    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rmaier\\Documents\\API-ClubVan\\club.van.api\\club.van.api.csproj",
+        "projectUniqueName": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
         "projectName": "club.van.api",
-        "projectPath": "C:\\Users\\rmaier\\Documents\\API-ClubVan\\club.van.api\\club.van.api.csproj",
-        "packagesPath": "C:\\Users\\rmaier\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rmaier\\Documents\\API-ClubVan\\club.van.api\\obj\\",
+        "projectPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
+        "packagesPath": "C:\\Users\\Roberto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\rmaier\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Roberto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -25,7 +25,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://nmtwnseqiisdev.dcstara.com.br:82/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -82,7 +81,7 @@
             },
             {
               "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.0.3, 3.0.3]"
+              "version": "[3.0.2, 3.0.2]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
@@ -101,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
