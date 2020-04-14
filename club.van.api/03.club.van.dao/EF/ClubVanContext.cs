@@ -11,7 +11,7 @@ namespace club.van.api.dao.EF
         public DbSet<Empresa> Empresas { get; set; }
         public DbSet<Veiculo> Veiculos { get; set; }
         public DbSet<Rota> Rotas { get; set; }
-        public DbSet<ViagemDias> ViagemDias { get; set; }
+        public DbSet<ViagemDia> ViagemDias { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace club.van.api.dao.EF.Map
 {
-    public class MapViagemDias : IEntityTypeConfiguration<ViagemDias>
+    public class MapViagemDias : IEntityTypeConfiguration<ViagemDia>
     {
-        public void Configure(EntityTypeBuilder<ViagemDias> builder)
+        public void Configure(EntityTypeBuilder<ViagemDia> builder)
         {
-            builder.ToTable("VIAGEM_DIAS");
-            builder.HasKey(x => x.Id).HasName("ID");
+            builder.ToTable("VIAGEM_DIA");
+
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.NumeroSemana).HasColumnName("NUMERO_SEMANA");
             builder.Property(x => x.SegundaFeira).HasColumnName("SEGUNDA_FEIRA");
             builder.Property(x => x.TercaFeira).HasColumnName("TERCA_FEIRA");
@@ -20,16 +22,7 @@ namespace club.van.api.dao.EF.Map
             builder.Property(x => x.Domingo).HasColumnName("DOMINGO");
 
             builder.HasOne(x => x.Usuario).WithMany().HasForeignKey("USUARIO_ID");
-            builder.OwnsOne<Usuario>(x => x.Usuario, cb =>
-            {
-                cb.Property(x => x.Id).HasColumnName("USUARIO_ID");
-            });
-
             builder.HasOne(x => x.Empresa).WithMany().HasForeignKey("EMPRESA_ID");
-            builder.OwnsOne<Empresa>(x => x.Empresa, cb =>
-            {
-                cb.Property(x => x.Id).HasColumnName("EMPRESA_ID");
-            });
         }
     }
 }

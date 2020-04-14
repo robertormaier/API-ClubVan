@@ -2,7 +2,7 @@
 
 namespace club.van.api.data
 {
-    public class ViagemDias : EntidadeBase
+    public class ViagemDia : EntidadeBase
     {
         public int NumeroSemana { get; set; }
         public bool SegundaFeira { get; set; }

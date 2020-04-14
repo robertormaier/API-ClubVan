@@ -5,8 +5,8 @@ namespace club.van.api.dao.Interface
 {
     public interface IViagemDiasDao
     {
-        ViagemDias Obeter(Guid id);
+        ViagemDia Obeter(Guid id);
 
-        void Salvar(ViagemDias viagemDias);
+        void Salvar(ViagemDia viagemDias);
     }
 }

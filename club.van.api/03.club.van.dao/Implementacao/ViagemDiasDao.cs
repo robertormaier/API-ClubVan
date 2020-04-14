@@ -10,12 +10,12 @@ namespace club.van.dao.Implementacao
     {
         private readonly ClubVanContext clubVanContext;
 
-        public ViagemDias Obeter(Guid id)
+        public ViagemDia Obeter(Guid id)
         {
             return this.clubVanContext.ViagemDias.FirstOrDefault(x => x.Id == id);
         }
 
-        public void Salvar(ViagemDias viagemDias)
+        public void Salvar(ViagemDia viagemDias)
         {
             this.clubVanContext.ViagemDias.Add(viagemDias);
         }

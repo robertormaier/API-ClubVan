@@ -1,3 +1,4 @@
+using club.van.api.dao.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,8 @@ namespace club.van.api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Club Van API", Version = "v1" });
             });
+
+            services.AddDbContext<ClubVanContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

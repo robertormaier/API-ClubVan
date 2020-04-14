@@ -9,7 +9,9 @@ namespace club.van.api.dao.EF.Map
         public void Configure(EntityTypeBuilder<Empresa> builder)
         {
             builder.ToTable("EMPRESA");
-            builder.HasKey(x => x.Id).HasName("ID");
+
+            builder.HasKey(x => x.Id);
+
             builder.Property(x => x.Nome).HasColumnName("NOME").HasMaxLength(200);
             builder.Property(x => x.RazaoSocial).HasColumnName("RAZAO_SOCIAL").HasMaxLength(200);
             builder.Property(x => x.Cnpj).HasColumnName("CNPJ").HasMaxLength(200);
