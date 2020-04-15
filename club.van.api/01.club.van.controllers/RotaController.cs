@@ -1,10 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace club.van.api.controllers
 {
-    [Route("api/UsuarioController")]
+    [Route("api/RotaController")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class RotaController : ControllerBase
     {
         [HttpGet]
         [Route("Obter/{id}")]
@@ -12,8 +17,7 @@ namespace club.van.api.controllers
         {
             try
             {
-
-                return "usuario";
+                return "rota";
             }
             catch (System.Exception)
             {
