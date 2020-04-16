@@ -1,4 +1,8 @@
+using club.van.api.business.Implementacao;
+using club.van.api.business.Interface;
 using club.van.api.dao.EF;
+using club.van.api.dao.Implementacao;
+using club.van.api.dao.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,11 +32,14 @@ namespace club.van.api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Club Van API", Version = "v1" });
             });
 
-            services.AddDbContext<ClubVanContext>();
+            services.AddScoped<ClubVanContext, ClubVanContext>();
+
+            services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
+            services.AddTransient<IUsuarioDao, UsuarioDao>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env , ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -59,5 +66,7 @@ namespace club.van.api
 
             loggerFactory.AddFile("Logs/club-van-api-(Date).txt");
         }
+
+
     }
 }

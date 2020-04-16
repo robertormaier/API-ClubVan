@@ -3,7 +3,7 @@ using System;
 
 namespace club.van.api.dao.Interface
 {
-    interface IUsuarioDao
+    public interface IUsuarioDao
     {
         Usuario Obter(string email, string senha);
         Usuario Obter(Guid id);

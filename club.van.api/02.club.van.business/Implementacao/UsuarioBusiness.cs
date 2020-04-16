@@ -1,4 +1,5 @@
 ﻿using club.van.api.business.Interface;
+using club.van.api.dao.Interface;
 using club.van.api.data;
 using club.van.api.data.dto.UsuarioArguments;
 using System;
@@ -7,6 +8,13 @@ namespace club.van.api.business.Implementacao
 {
     public class UsuarioBusiness : IUsuarioBusiness
     {
+        private IUsuarioDao usuarioDao;
+
+        public UsuarioBusiness(IUsuarioDao usuarioDao)
+        {
+            this.usuarioDao = usuarioDao;
+        }
+
         public AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
             try
@@ -38,9 +46,16 @@ namespace club.van.api.business.Implementacao
             }
         }
 
-        public AutenticarUsuarioResponse AutenticarUusuario(AutenticarUsuarioRequest autenticarUsuarioRequest)
+        public bool AutenticarUusuario(string email, string senha)
         {
-            throw new NotImplementedException();
+            var senhaHash = this.CalculaHash(senha);
+
+            var response = this.usuarioDao.Obter(email, senhaHash);
+
+            if (response == null)
+                throw new Exception("Nenhum usuario encontrado");
+            else
+                return true;
         }
 
         private bool ValidarUsuario(AdicionarUsuarioRequest AdicionarUsuarioRequest)
@@ -80,6 +95,26 @@ namespace club.van.api.business.Implementacao
 
             else
                 return true;
+        }
+
+        public string CalculaHash(string Senha)
+        {
+            try
+            {
+                System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Senha);
+                byte[] hash = md5.ComputeHash(inputBytes);
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    sb.Append(hash[i].ToString("X2"));
+                }
+                return sb.ToString(); // Retorna senha criptografada 
+            }
+            catch (Exception)
+            {
+                return null; // Caso encontre erro retorna nulo
+            }
         }
 
     }

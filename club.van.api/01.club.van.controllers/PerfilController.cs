@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace club.van.api.controllers
 {
+
+
+
     [Route("api/PerfilController")]
     [ApiController]
     public class PerfilController : ControllerBase

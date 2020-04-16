@@ -6,6 +6,8 @@ namespace club.van.api.business.Interface
     {
         AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest);
 
-        AutenticarUsuarioResponse AutenticarUusuario(AutenticarUsuarioRequest autenticarUsuarioRequest);
+        bool AutenticarUusuario(string email, string senha);
+
+        string CalculaHash(string Senha);
     }
 }
