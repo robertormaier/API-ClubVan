@@ -2,6 +2,7 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace club.van.api.dao.Implementacao
@@ -28,6 +29,11 @@ namespace club.van.api.dao.Implementacao
         public Usuario Obter(Guid id)
         {
             return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<Usuario> ObterTodos()
+        {
+            return this.clubVanContext.Usuarios.Where(x => x.Ativo == true).ToList();
         }
 
         public void Salvar(Usuario usuario)

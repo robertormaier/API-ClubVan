@@ -1,6 +1,6 @@
 ﻿namespace club.van.api.data.dto.UsuarioArguments
 {
-    public class AdicionarUsuarioRequest
+    public class AtualizarUsuarioResponse
     {
         public string Nome { get; set; }
         public string Cpf { get; set; }

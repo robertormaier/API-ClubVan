@@ -3,6 +3,7 @@ using club.van.api.dao.Interface;
 using club.van.api.data;
 using club.van.api.data.dto.UsuarioArguments;
 using System;
+using System.Collections.Generic;
 
 namespace club.van.api.business.Implementacao
 {
@@ -17,33 +18,32 @@ namespace club.van.api.business.Implementacao
 
         public AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
-            try
+            if (this.ValidarUsuario(adicionarUsuarioRequest))
             {
-                if (this.ValidarUsuario(adicionarUsuarioRequest))
-                {
-                    Usuario usuario = new Usuario();
-                    {
-                        usuario.Nome = adicionarUsuarioRequest.Nome;
-                        usuario.Cpf = adicionarUsuarioRequest.Cpf;
-                        usuario.Email = adicionarUsuarioRequest.Email;
-                        usuario.Senha = adicionarUsuarioRequest.Senha;
-                        usuario.Perfil = adicionarUsuarioRequest.Perfil;
-                        usuario.Ativo = true;
-                        usuario.Empresa = adicionarUsuarioRequest.Empresa;
-                        usuario.Bairro = adicionarUsuarioRequest.Bairro;
-                        usuario.Rua = adicionarUsuarioRequest.Rua;
-                        usuario.Cidade = adicionarUsuarioRequest.Cidade;
-                        usuario.Uf = adicionarUsuarioRequest.Uf;
-                        usuario.Rota = adicionarUsuarioRequest.Rota;
-                    }
-                }
+                //Recuperar Objeto Perfil
 
-                return null; // apenas para teste
+                //Recuperar Objeto Empresa
+
+                //Recuperar Objeto Rota
+
+                var usuario = new Usuario();
+                {
+                    usuario.Nome = adicionarUsuarioRequest.Nome;
+                    usuario.Cpf = adicionarUsuarioRequest.Cpf;
+                    usuario.Email = adicionarUsuarioRequest.Email;
+                    usuario.Senha = adicionarUsuarioRequest.Senha;
+                    //  usuario.Perfil = perfil;
+                    usuario.Ativo = true;
+                    //usuario.Empresa = empresa;
+                    usuario.Bairro = adicionarUsuarioRequest.Bairro;
+                    usuario.Rua = adicionarUsuarioRequest.Rua;
+                    usuario.Cidade = adicionarUsuarioRequest.Cidade;
+                    usuario.Uf = adicionarUsuarioRequest.Uf;
+                    // usuario.Rota = rota;
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+            return null; // apenas para teste
         }
 
         public bool AutenticarUusuario(string email, string senha)
@@ -72,10 +72,10 @@ namespace club.van.api.business.Implementacao
             if (AdicionarUsuarioRequest.Senha == null)
                 throw new Exception("Senha não pode ser vazia");
 
-            if (AdicionarUsuarioRequest.Perfil == null)
+            if (AdicionarUsuarioRequest.PerfilId == null)
                 throw new Exception("Nome não pode ser vazio");
 
-            if (AdicionarUsuarioRequest.Empresa == null)
+            if (AdicionarUsuarioRequest.EmpresaId == null)
                 throw new Exception("Empresa não pode ser vazia");
 
             if (AdicionarUsuarioRequest.Bairro == null)
@@ -90,7 +90,7 @@ namespace club.van.api.business.Implementacao
             if (AdicionarUsuarioRequest.Uf == null)
                 throw new Exception("UF não pode ser vazia");
 
-            if (AdicionarUsuarioRequest.Rota == null)
+            if (AdicionarUsuarioRequest.RotaId == null)
                 throw new Exception("Rota não pode ser vazia");
 
             else
@@ -117,6 +117,39 @@ namespace club.van.api.business.Implementacao
             }
         }
 
+        public void Update(AtualizarUsuarioRequest atualizarUsuarioRequest)
+        {
+            if (atualizarUsuarioRequest.Id == null)
+                throw new Exception("O id deve pode estar vazio");
+
+            Usuario usuario = new Usuario();
+            {
+                usuario.Nome = atualizarUsuarioRequest.Nome;
+                usuario.Cpf = atualizarUsuarioRequest.Cpf;
+                usuario.Email = atualizarUsuarioRequest.Email;
+                usuario.Senha = atualizarUsuarioRequest.Senha;
+                usuario.Perfil.Id = atualizarUsuarioRequest.PerfilId;
+                usuario.Ativo = atualizarUsuarioRequest.Ativo;
+                usuario.Empresa.Id = atualizarUsuarioRequest.EmpresaId;
+                usuario.Bairro = atualizarUsuarioRequest.Bairro;
+                usuario.Rua = atualizarUsuarioRequest.Rua;
+                usuario.Cidade = atualizarUsuarioRequest.Cidade;
+                usuario.Uf = atualizarUsuarioRequest.Uf;
+                usuario.Rota.Id = atualizarUsuarioRequest.RotaId;
+            }
+
+            this.usuarioDao.Salvar(usuario);
+        }
+
+        public void Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Usuario> ObterTodos()
+        {
+            return this.usuarioDao.ObterTodos();
+        }
     }
 }
 
