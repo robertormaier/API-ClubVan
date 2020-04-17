@@ -36,6 +36,9 @@ namespace club.van.api
 
             services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
             services.AddTransient<IUsuarioDao, UsuarioDao>();
+            services.AddTransient<IEmpresaDao, EmpresaDao>();
+            services.AddTransient<IPerfilDao, PerfilDao>();
+            services.AddTransient<IRotaDao, RotaDao>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

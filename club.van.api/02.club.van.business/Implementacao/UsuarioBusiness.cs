@@ -11,20 +11,38 @@ namespace club.van.api.business.Implementacao
     {
         private IUsuarioDao usuarioDao;
 
-        public UsuarioBusiness(IUsuarioDao usuarioDao)
+        private IEmpresaDao empresaDao;
+
+        private IPerfilDao perfilDao;
+
+        private IRotaDao rotaDao;
+
+        public UsuarioBusiness(IUsuarioDao usuarioDao, IEmpresaDao empresaDao, IPerfilDao perfilDao, IRotaDao rotaDao)
         {
             this.usuarioDao = usuarioDao;
+
+            this.empresaDao = empresaDao;
+
+            this.perfilDao = perfilDao;
+
+            this.rotaDao = rotaDao;
         }
 
         public AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
             if (this.ValidarUsuario(adicionarUsuarioRequest))
             {
-                //Recuperar Objeto Perfil
+                var perfil = this.perfilDao.Obter(adicionarUsuarioRequest.PerfilId);
+                if (perfil == null)
+                    throw new Exception("");
 
-                //Recuperar Objeto Empresa
+                var empresa = this.empresaDao.Obter(adicionarUsuarioRequest.EmpresaId);
+                if (empresa == null)
+                    throw new Exception("");
 
-                //Recuperar Objeto Rota
+                var rota = this.rotaDao.Obter(adicionarUsuarioRequest.RotaId);
+                if (rota == null)
+                    throw new Exception("");
 
                 var usuario = new Usuario();
                 {
@@ -32,21 +50,25 @@ namespace club.van.api.business.Implementacao
                     usuario.Cpf = adicionarUsuarioRequest.Cpf;
                     usuario.Email = adicionarUsuarioRequest.Email;
                     usuario.Senha = adicionarUsuarioRequest.Senha;
-                    //  usuario.Perfil = perfil;
+                    usuario.Perfil = perfil;
                     usuario.Ativo = true;
-                    //usuario.Empresa = empresa;
+                    usuario.Empresa = empresa;
                     usuario.Bairro = adicionarUsuarioRequest.Bairro;
                     usuario.Rua = adicionarUsuarioRequest.Rua;
                     usuario.Cidade = adicionarUsuarioRequest.Cidade;
                     usuario.Uf = adicionarUsuarioRequest.Uf;
-                    // usuario.Rota = rota;
+                    usuario.Rota = rota;
                 }
+
+                this.usuarioDao.Salvar(usuario);
+
+                return new AdicionarUsuarioResponse(usuario.Id);
             }
 
-            return null; // apenas para teste
+            return null;
         }
 
-        public bool AutenticarUusuario(string email, string senha)
+        public bool AutenticarUsuario(string email, string senha)
         {
             var senhaHash = this.CalculaHash(senha);
 
@@ -109,15 +131,15 @@ namespace club.van.api.business.Implementacao
                 {
                     sb.Append(hash[i].ToString("X2"));
                 }
-                return sb.ToString(); // Retorna senha criptografada 
+                return sb.ToString();
             }
             catch (Exception)
             {
-                return null; // Caso encontre erro retorna nulo
+                return null;
             }
         }
 
-        public void Update(AtualizarUsuarioRequest atualizarUsuarioRequest)
+        public AtualizarUsuarioResponse Update(AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
             if (atualizarUsuarioRequest.Id == null)
                 throw new Exception("O id deve pode estar vazio");
@@ -139,6 +161,8 @@ namespace club.van.api.business.Implementacao
             }
 
             this.usuarioDao.Salvar(usuario);
+
+            return new AtualizarUsuarioResponse(usuario);
         }
 
         public void Delete(Guid id)

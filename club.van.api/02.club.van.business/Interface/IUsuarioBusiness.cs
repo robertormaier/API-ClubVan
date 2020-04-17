@@ -9,9 +9,9 @@ namespace club.van.api.business.Interface
     {
         AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest);
 
-        bool AutenticarUusuario(string email, string senha);
+        bool AutenticarUsuario(string email, string senha);
 
-        void Update(AtualizarUsuarioRequest atualizarUsuarioRequest);
+        AtualizarUsuarioResponse Update(AtualizarUsuarioRequest atualizarUsuarioRequest);
 
         void Delete(Guid id);
 

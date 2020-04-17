@@ -26,7 +26,7 @@ namespace club.van.api.controllers
         {
             try
             {
-                var response = this.usuarioBusiness.AutenticarUusuario(email, senha);
+                var response = this.usuarioBusiness.AutenticarUsuario(email, senha);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -73,8 +73,8 @@ namespace club.van.api.controllers
         {
             try
             {
-                this.usuarioBusiness.Update(atualizarUsuarioRequest);
-                return NoContent();
+                var response = this.usuarioBusiness.Update(atualizarUsuarioRequest);
+                return base.Ok(response);
             }
             catch (System.Exception e)
             {

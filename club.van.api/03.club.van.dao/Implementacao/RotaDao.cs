@@ -4,7 +4,7 @@ using club.van.api.data;
 using System;
 using System.Linq;
 
-namespace club.van.dao.Implementacao
+namespace club.van.api.dao.Implementacao
 {
     public class RotaDao : IRotaDao
     {
