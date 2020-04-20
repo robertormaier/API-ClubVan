@@ -22,7 +22,7 @@ namespace club.van.api
 
         public IConfiguration Configuration { get; }
 
-     
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -37,7 +37,6 @@ namespace club.van.api
             //Usuario
             services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
             services.AddTransient<IUsuarioDao, UsuarioDao>();
-<<<<<<< HEAD
 
             //Empresa
             services.AddTransient<IEmpresaDao, EmpresaDao>();
@@ -53,15 +52,10 @@ namespace club.van.api
             //Veiculo
             services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
             services.AddTransient<IVeiculoDao, VeiculoDao>();
-            
-=======
-            services.AddTransient<IEmpresaDao, EmpresaDao>();
-            services.AddTransient<IPerfilDao, PerfilDao>();
-            services.AddTransient<IRotaDao, RotaDao>();
->>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
+
         }
 
-     
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())

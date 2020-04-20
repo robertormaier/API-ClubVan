@@ -23,6 +23,7 @@ namespace club.van.api.dao.Implementacao
         public void Salvar(Empresa empresa)
         {
             this.clubVanContext.Empresas.Add(empresa);
+            this.clubVanContext.SaveChanges();
         }
     }
 }
