@@ -18,6 +18,7 @@ namespace club.van.dao.Implementacao
         public void Salvar(ViagemDia viagemDias)
         {
             this.clubVanContext.ViagemDias.Add(viagemDias);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

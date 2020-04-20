@@ -2,9 +2,10 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace club.van.dao.Implementacao
+namespace club.van.api.dao.Implementacao
 {
     public class RotaDao : IRotaDao
     {
@@ -20,9 +21,21 @@ namespace club.van.dao.Implementacao
             return this.clubVanContext.Rotas.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Rota> ObterTodas()
+        {
+            return this.clubVanContext.Rotas.ToList();
+        }
+
         public void Salvar(Rota rota)
         {
             this.clubVanContext.Rotas.Add(rota);
+            this.clubVanContext.SaveChanges();
+        }
+
+        public void Delete(Rota rota)
+        {
+            this.clubVanContext.Rotas.Remove(rota);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

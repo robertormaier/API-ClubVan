@@ -2,5 +2,8 @@
 {
     public class AdicionarVeiculoRequest
     {
+        public string Placa { get; set; }
+        public string Modelo { get; set; }
+        public string Descricao { get; set; }
     }
 }

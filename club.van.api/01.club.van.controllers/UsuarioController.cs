@@ -2,6 +2,7 @@
 using club.van.api.data.dto.UsuarioArguments;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace club.van.api.controllers
 {
@@ -21,12 +22,12 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("Obter/{email}/{senha}")]
-        public IActionResult Obter(string email, string senha)
+        [Route("AutenticarUsuario/{email}/{senha}")]
+        public IActionResult AutenticarUsuario(string email, string senha)
         {
             try
             {
-                var response = this.usuarioBusiness.AutenticarUusuario(email, senha);
+                var response = this.usuarioBusiness.AutenticarUsuario(email, senha);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -68,13 +69,13 @@ namespace club.van.api.controllers
             }
         }
 
-        [HttpPut("Update/{id}")]
-        public IActionResult Update(int id, [FromBody] AtualizarUsuarioRequest atualizarUsuarioRequest)
+        [HttpPut("Update")]
+        public IActionResult Update([FromBody] AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
             try
             {
-                this.usuarioBusiness.Update(atualizarUsuarioRequest);
-                return NoContent();
+                var response = this.usuarioBusiness.Update(atualizarUsuarioRequest);
+                return base.Ok(response);
             }
             catch (System.Exception e)
             {
@@ -84,15 +85,17 @@ namespace club.van.api.controllers
         }
 
         [HttpDelete("Delete/{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
-
+                this.usuarioBusiness.Delete(id);
+                return base.Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
     }

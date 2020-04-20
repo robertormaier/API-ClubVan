@@ -4,22 +4,22 @@ using Microsoft.Extensions.Logging;
 
 namespace club.van.api.controllers
 {
-    [Route("api/PerfilController")]
+    [Route("api/EmpresaController")]
     [ApiController]
-    public class PerfilController : ControllerBase
+    public class EmpresaController : ControllerBase
     {
-        private IPerfilBusiness  perfilBusiness;
+        private IPerfilBusiness perfilBusiness;
 
         private ILogger<UsuarioController> logger;
 
-        public PerfilController(IPerfilBusiness perfilBusiness, ILogger<UsuarioController> logger)
+        public EmpresaController(IPerfilBusiness perfilBusiness, ILogger<UsuarioController> logger)
         {
             this.perfilBusiness = perfilBusiness;
             this.logger = logger;
         }
 
         [HttpGet]
-        [Route("Obter")]                                                                                                            
+        [Route("Obter")]
         public IActionResult ObterTodos()
         {
             try

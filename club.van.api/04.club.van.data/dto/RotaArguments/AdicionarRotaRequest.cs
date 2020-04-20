@@ -1,9 +1,11 @@
-﻿namespace club.van.api.data.dto.RotaArguments
+﻿using System;
+
+namespace club.van.api.data.dto.RotaArguments
 {
     public class AdicionarRotaRequest
     {
         public string Nome { get; set; }
-        public Veiculo Veiculo { get; set; }
-        public Empresa Empresa { get; set; }
+        public Guid VeiculoId { get; set; }
+        public Guid EmpresaId { get; set; }
     }
 }

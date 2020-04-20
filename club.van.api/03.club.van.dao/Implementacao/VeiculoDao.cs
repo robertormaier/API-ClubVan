@@ -2,6 +2,7 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace club.van.api.dao.Implementacao
@@ -20,9 +21,21 @@ namespace club.van.api.dao.Implementacao
             return this.clubVanContext.Veiculos.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Veiculo> ObterTodos()
+        {
+            return this.clubVanContext.Veiculos.ToList();
+        }
+
         public void Salvar(Veiculo veiculo)
         {
             this.clubVanContext.Veiculos.Add(veiculo);
+            this.clubVanContext.SaveChanges();
+        }
+
+        public void Delete(Veiculo veiculo)
+        {
+            this.clubVanContext.Veiculos.Remove(veiculo);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

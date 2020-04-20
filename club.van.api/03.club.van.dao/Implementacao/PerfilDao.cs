@@ -2,6 +2,7 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace club.van.api.dao.Implementacao
@@ -20,9 +21,15 @@ namespace club.van.api.dao.Implementacao
             return this.clubVanContext.Perfis.FirstOrDefault(x => x.Id == id);
         }
 
+        public List<Perfil> ObterTodos()
+        {
+            return this.clubVanContext.Perfis.ToList();
+        }
+
         public void Salvar(Perfil perfil)
         {
             this.clubVanContext.Perfis.Add(perfil);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

@@ -11,5 +11,7 @@ namespace club.van.api.dao.Interface
         List<Usuario> ObterTodos();
         void Salvar(Usuario usuario);
         bool Existe(string email);
+
+        void Delete(Usuario usuario);
     }
 }

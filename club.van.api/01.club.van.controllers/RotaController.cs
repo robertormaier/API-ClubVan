@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using club.van.api.business.Interface;
+using club.van.api.data.dto.RotaArguments;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace club.van.api.controllers
 {
@@ -11,61 +10,61 @@ namespace club.van.api.controllers
     [ApiController]
     public class RotaController : ControllerBase
     {
+        private IRotaBusiness rotaBusiness;
+
+        private ILogger<UsuarioController> logger;
+
+        public RotaController(IRotaBusiness rotaBusiness, ILogger<UsuarioController> logger)
+        {
+            this.rotaBusiness = rotaBusiness;
+            this.logger = logger;
+        }
+
         [HttpGet]
-        [Route("Obter/{id}")]
-        public string Obter(int id)
+        [Route("ObterTodas")]
+        public IActionResult ObterTodas()
         {
             try
             {
-                return "rota";
+                var response = this.rotaBusiness.ObterTodas();
+                return base.Ok(response);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
+
         }
 
         [HttpPost]
         [Route("Adicionar")]
-        public void Adicionar([FromBody] string value)
+        public IActionResult Adicionar([FromBody] AdicionarRotaRequest adicionarRotaRequest)
         {
             try
             {
-
+                var response = this.rotaBusiness.Adicionar(adicionarRotaRequest);
+                return base.Ok(response);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
-            }
-        }
-
-        [HttpPut("Update/{id}")]
-        public void Update(int id, [FromBody] string value)
-        {
-            try
-            {
-
-            }
-            catch (System.Exception)
-            {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
 
         [HttpDelete("Delete/{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
-
+                this.rotaBusiness.Delete(id);
+                return base.Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
     }
