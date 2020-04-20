@@ -34,6 +34,7 @@ namespace club.van.api.business.Implementacao
             {
                 var perfil = this.perfilDao.Obter(adicionarUsuarioRequest.PerfilId);
                 if (perfil == null)
+<<<<<<< HEAD
                     throw new Exception("Nenhum perfil econtrado com esse id");
 
                 var empresa = this.empresaDao.Obter(adicionarUsuarioRequest.EmpresaId);
@@ -43,6 +44,17 @@ namespace club.van.api.business.Implementacao
                 var rota = this.rotaDao.Obter(adicionarUsuarioRequest.RotaId);
                 if (rota == null)
                     throw new Exception("Nenhuma rota econtrada com esse id");
+=======
+                    throw new Exception("");
+
+                var empresa = this.empresaDao.Obter(adicionarUsuarioRequest.EmpresaId);
+                if (empresa == null)
+                    throw new Exception("");
+
+                var rota = this.rotaDao.Obter(adicionarUsuarioRequest.RotaId);
+                if (rota == null)
+                    throw new Exception("");
+>>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
 
                 var usuario = new Usuario();
                 {
@@ -65,7 +77,11 @@ namespace club.van.api.business.Implementacao
                 return new AdicionarUsuarioResponse(usuario.Id);
             }
 
+<<<<<<< HEAD
             throw new Exception("Não foi possivel adicionar o usuário");
+=======
+            return null;
+>>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
         }
 
         public bool AutenticarUsuario(string email, string senha)

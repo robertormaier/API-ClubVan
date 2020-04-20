@@ -37,6 +37,7 @@ namespace club.van.api
             //Usuario
             services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
             services.AddTransient<IUsuarioDao, UsuarioDao>();
+<<<<<<< HEAD
 
             //Empresa
             services.AddTransient<IEmpresaDao, EmpresaDao>();
@@ -53,6 +54,11 @@ namespace club.van.api
             services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
             services.AddTransient<IVeiculoDao, VeiculoDao>();
             
+=======
+            services.AddTransient<IEmpresaDao, EmpresaDao>();
+            services.AddTransient<IPerfilDao, PerfilDao>();
+            services.AddTransient<IRotaDao, RotaDao>();
+>>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
         }
 
      
