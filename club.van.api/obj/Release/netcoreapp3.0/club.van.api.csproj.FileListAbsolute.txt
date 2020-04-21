@@ -69,3 +69,5 @@ C:\Users\rmaier\Documents\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\sta
 C:\Users\rmaier\Documents\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\club.van.api.dll
 C:\Users\rmaier\Documents\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\club.van.api.pdb
 C:\Users\rmaier\Documents\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\club.van.api.genruntimeconfig.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\club.van.api.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.0\club.van.api.pdb

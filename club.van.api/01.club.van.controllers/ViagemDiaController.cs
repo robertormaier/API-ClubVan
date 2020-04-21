@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using club.van.api.business.Interface;
+using club.van.api.data.dto.ViagemDiasArguments;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace club.van.controllers
 {
@@ -11,61 +10,76 @@ namespace club.van.controllers
     [ApiController]
     public class ViagemDiaController : ControllerBase
     {
+        private IViagemDiasBusiness viagemDiasBusiness;
+
+        private ILogger<ViagemDiaController> logger;
+
+        public ViagemDiaController(IViagemDiasBusiness viagemDiasBusiness, ILogger<ViagemDiaController> logger)
+        {
+            this.viagemDiasBusiness = viagemDiasBusiness;
+            this.logger = logger;
+        }
+
         [HttpGet]
-        [Route("Obter/{id}")]
-        public string Obter(int id)
+        [Route("ObterTodos/{usuarioId}/{empresaId}/{numeroSemana}")]
+        public IActionResult ObterTodos(Guid usuarioId, Guid empresaId, int numeroSemana)
         {
             try
             {
-                return "Viagens";
+                var response = this.viagemDiasBusiness.ObterTodos(usuarioId, empresaId, numeroSemana);
+                return base.Ok(response);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
 
         [HttpPost]
         [Route("Adicionar")]
-        public void Adicionar([FromBody] string value)
+        public IActionResult Adicionar([FromBody] AdicionarViagemDiasRequest adicionarViagemDiasRequest)
         {
             try
             {
-
+                var response = this.viagemDiasBusiness.AdicionarViagemDia(adicionarViagemDiasRequest);
+                return base.Ok(response);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
 
-        [HttpPut("Update/{id}")]
-        public void Update(int id, [FromBody] string value)
+        [HttpPut("Update")]
+        public IActionResult Update([FromBody] AtualizarViagemDiasRequest atualizarViagemDiasRequest)
         {
             try
             {
-
+                var response = this.viagemDiasBusiness.Update(atualizarViagemDiasRequest);
+                return base.Ok(response);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
+
 
         [HttpDelete("Delete/{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
-
+                this.viagemDiasBusiness.Delete(id);
+                return base.Ok();
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-
-                throw;
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return base.Ok(e);
             }
         }
     }

@@ -19,7 +19,7 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("Obter")]                                                                                                            
+        [Route("ObterTodos")]                                                                                                            
         public IActionResult ObterTodos()
         {
             try

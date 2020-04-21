@@ -22,7 +22,7 @@ namespace club.van.api.dao.EF.Map
             builder.Property(x => x.Domingo).HasColumnName("DOMINGO");
 
             builder.HasOne(x => x.Usuario).WithMany().HasForeignKey("USUARIO_ID");
-            builder.HasOne(x => x.Empresa).WithMany().HasForeignKey("EMPRESA_ID");
+            builder.HasOne(x => x.Rota).WithMany().HasForeignKey("ROTA_ID");
         }
     }
 }

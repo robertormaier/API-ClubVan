@@ -3,6 +3,7 @@ using club.van.api.business.Interface;
 using club.van.api.dao.EF;
 using club.van.api.dao.Implementacao;
 using club.van.api.dao.Interface;
+using club.van.dao.Implementacao;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -52,6 +53,10 @@ namespace club.van.api
             //Veiculo
             services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
             services.AddTransient<IVeiculoDao, VeiculoDao>();
+
+            //ViagemDias
+            services.AddTransient<IViagemDiasBusiness, ViagemDiasBusiness>();
+            services.AddTransient<IViagemDiasDao, ViagemDiasDao>();
 
         }
 

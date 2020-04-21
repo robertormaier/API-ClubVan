@@ -12,7 +12,7 @@ namespace club.van.api.data
         public bool SextaFeira { get; set; }
         public bool Sabado { get; set; }
         public bool Domingo { get; set; }
-        public Empresa Empresa { get; set; }
+        public Rota Rota { get; set; }
         public Usuario Usuario { get; set; }
     }
 }

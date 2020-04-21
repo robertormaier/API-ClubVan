@@ -1,4 +1,6 @@
-﻿namespace club.van.api.data.dto.ViagemDiasArguments
+﻿using System;
+
+namespace club.van.api.data.dto.ViagemDiasArguments
 {
     public class AdicionarViagemDiasRequest
     {
@@ -10,7 +12,7 @@
         public bool SextaFeira { get; set; }
         public bool Sabado { get; set; }
         public bool Domingo { get; set; }
-        public Empresa Empresa { get; set; }
-        public Usuario Usuario { get; set; }
+        public Guid RotaId { get; set; }
+        public Guid UsuarioId { get; set; }
     }
 }

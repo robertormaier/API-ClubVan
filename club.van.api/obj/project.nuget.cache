@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "gxQb0xTRu366gomYpnja/bqA4Y/TGaQo4OugCUWcdNrmwIpIOPhKdlSQEWZVcZFo96U4NCZaYBJFbtELvfRdbg==",
-=======
-  "dgSpecHash": "AunUP7fAGdUmG4WnKFm6LayFBedKHZrMPxvuWgqSEmW9fQiH6LIBmUeaTEd1DFciPUmz1aP6OsZKLc5sl6YE5Q==",
->>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
+  "dgSpecHash": "hEFnt4p10tLZ13B+Wi5+UxTy/L98e54fOpuxkyAbyBHa70N5FEHB+6q03WUcdqyFGRYruvf2j9Zt8NDzHVVfVA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
   "expectedPackageFiles": [
@@ -35,20 +31,13 @@
     "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.identity.client\\3.0.8\\microsoft.identity.client.3.0.8.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
-<<<<<<< HEAD
     "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.openapi\\1.1.4\\microsoft.openapi.1.1.4.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.design\\3.1.2\\microsoft.visualstudio.web.codegeneration.design.3.1.2.nupkg.sha512",
-=======
-    "C:\\Users\\rmaier\\.nuget\\packages\\microsoft.openapi\\1.1.4\\microsoft.openapi.1.1.4.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\microsoft.visualstudio.web.codegeneration.design\\3.1.2\\microsoft.visualstudio.web.codegeneration.design.3.1.2.nupkg.sha512",
->>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-<<<<<<< HEAD
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog\\2.5.0\\serilog.2.5.0.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog.extensions.logging\\2.0.2\\serilog.extensions.logging.2.0.2.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog.extensions.logging.file\\2.0.0\\serilog.extensions.logging.file.2.0.0.nupkg.sha512",
@@ -56,23 +45,10 @@
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog.sinks.async\\1.1.0\\serilog.sinks.async.1.1.0.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog.sinks.file\\3.2.0\\serilog.sinks.file.3.2.0.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\serilog.sinks.rollingfile\\3.3.0\\serilog.sinks.rollingfile.3.3.0.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore\\5.3.2\\swashbuckle.aspnetcore.5.3.2.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.3.2\\swashbuckle.aspnetcore.swagger.5.3.2.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.3.2\\swashbuckle.aspnetcore.swaggergen.5.3.2.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.3.2\\swashbuckle.aspnetcore.swaggerui.5.3.2.nupkg.sha512",
-=======
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog\\2.5.0\\serilog.2.5.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.extensions.logging\\2.0.2\\serilog.extensions.logging.2.0.2.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.extensions.logging.file\\2.0.0\\serilog.extensions.logging.file.2.0.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.formatting.compact\\1.0.0\\serilog.formatting.compact.1.0.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.sinks.async\\1.1.0\\serilog.sinks.async.1.1.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.sinks.file\\3.2.0\\serilog.sinks.file.3.2.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\serilog.sinks.rollingfile\\3.3.0\\serilog.sinks.rollingfile.3.3.0.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\swashbuckle.aspnetcore\\5.3.2\\swashbuckle.aspnetcore.5.3.2.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.3.2\\swashbuckle.aspnetcore.swagger.5.3.2.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.3.2\\swashbuckle.aspnetcore.swaggergen.5.3.2.nupkg.sha512",
-    "C:\\Users\\rmaier\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.3.2\\swashbuckle.aspnetcore.swaggerui.5.3.2.nupkg.sha512",
->>>>>>> e1a2c6e1549b6a85ff7d89362636d37fe6178cda
+    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore\\5.3.3\\swashbuckle.aspnetcore.5.3.3.nupkg.sha512",
+    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.3.3\\swashbuckle.aspnetcore.swagger.5.3.3.nupkg.sha512",
+    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.3.3\\swashbuckle.aspnetcore.swaggergen.5.3.3.nupkg.sha512",
+    "C:\\Users\\Roberto\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.3.3\\swashbuckle.aspnetcore.swaggerui.5.3.3.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\system.collections.immutable\\1.7.0\\system.collections.immutable.1.7.0.nupkg.sha512",
@@ -95,7 +71,6 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.linq.expressions\\4.1.0\\system.linq.expressions.4.1.0.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\system.memory\\4.5.2\\system.memory.4.5.2.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.net.nameresolution\\4.3.0\\system.net.nameresolution.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.objectmodel\\4.0.12\\system.objectmodel.4.0.12.nupkg.sha512",
@@ -110,7 +85,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\Roberto\\.nuget\\packages\\system.runtime.caching\\4.5.0\\system.runtime.caching.4.5.0.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",
@@ -134,22 +109,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.0.1\\microsoft.aspnetcore.app.ref.3.0.1.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.netcore.app.ref\\3.0.0\\microsoft.netcore.app.ref.3.0.0.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.0.3\\microsoft.netcore.app.host.win-x64.3.0.3.nupkg.sha512",
-    "C:\\Users\\Roberto\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.0.0\\microsoft.windowsdesktop.app.ref.3.0.0.nupkg.sha512"
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.VisualStudio.Web.CodeGeneration.Design 3.1.2' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.VisualStudio.Web.CodeGeneration.Design",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.0"
-      ]
-    }
-  ]
+  "logs": []
 }

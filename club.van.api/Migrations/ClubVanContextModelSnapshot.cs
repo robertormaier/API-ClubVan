@@ -193,9 +193,6 @@ namespace club.van.api.Migrations
                         .HasColumnName("DOMINGO")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("EMPRESA_ID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("NumeroSemana")
                         .HasColumnName("NUMERO_SEMANA")
                         .HasColumnType("int");
@@ -207,6 +204,9 @@ namespace club.van.api.Migrations
                     b.Property<bool>("QuintaFeira")
                         .HasColumnName("QUINTA_FEIRA")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ROTA_ID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Sabado")
                         .HasColumnName("SABADO")
@@ -229,7 +229,7 @@ namespace club.van.api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EMPRESA_ID");
+                    b.HasIndex("ROTA_ID");
 
                     b.HasIndex("USUARIO_ID");
 
@@ -264,9 +264,9 @@ namespace club.van.api.Migrations
 
             modelBuilder.Entity("club.van.api.data.ViagemDia", b =>
                 {
-                    b.HasOne("club.van.api.data.Empresa", "Empresa")
+                    b.HasOne("club.van.api.data.Rota", "Rota")
                         .WithMany()
-                        .HasForeignKey("EMPRESA_ID");
+                        .HasForeignKey("ROTA_ID");
 
                     b.HasOne("club.van.api.data.Usuario", "Usuario")
                         .WithMany()
