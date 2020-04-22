@@ -1,6 +1,8 @@
 ﻿using club.van.api.dao.EF;
 using club.van.api.dao.Interface;
 using club.van.api.data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +35,13 @@ namespace club.van.api.dao.Implementacao
 
         public List<Usuario> ObterTodos()
         {
-            return this.clubVanContext.Usuarios.Where(x => x.Ativo == true).ToList();
+            return
+                this.clubVanContext.Usuarios
+                .Include(x => x.Perfil)
+                .Include(x => x.Empresa)
+                .Include(x => x.Rota)
+                .Where(x => x.Ativo == true)
+                .ToList();
         }
 
         public void Salvar(Usuario usuario)
