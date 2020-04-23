@@ -21,7 +21,7 @@ namespace club.van.controllers
         }
 
         [HttpGet]
-        [Route("ObterTodos/{usuarioId}/{empresaId}/{numeroSemana}")]
+        [Route("GetAll/{usuarioId}/{empresaId}/{numeroSemana}")]
         public IActionResult ObterTodos(Guid usuarioId, Guid empresaId, int numeroSemana)
         {
             try

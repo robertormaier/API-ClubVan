@@ -1,9 +1,11 @@
 ﻿using club.van.api.business.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace club.van.api.controllers
 {
+    [Authorize]
     [Route("api/PerfilController")]
     [ApiController]
     public class PerfilController : ControllerBase
@@ -19,7 +21,7 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("ObterTodos")]                                                                                                            
+        [Route("GetAll")]                                                                                                            
         public IActionResult ObterTodos()
         {
             try

@@ -180,6 +180,11 @@ namespace club.van.api.business.Implementacao
         {
             return this.usuarioDao.ObterTodos();
         }
+
+        public Usuario FindByEmail(string email)
+        {
+            return this.usuarioDao.FindByEmail(email);
+        }
     }
 }
 

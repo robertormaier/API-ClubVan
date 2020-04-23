@@ -55,5 +55,10 @@ namespace club.van.api.dao.Implementacao
             this.clubVanContext.Usuarios.Remove(usuario);
             this.clubVanContext.SaveChanges();
         }
+
+        public Usuario FindByEmail(string email)
+        {
+            return this.clubVanContext.Usuarios.Find(email);
+        }
     }
 }

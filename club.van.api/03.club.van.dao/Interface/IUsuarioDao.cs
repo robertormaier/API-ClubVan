@@ -17,5 +17,7 @@ namespace club.van.api.dao.Interface
         bool Existe(string email);
 
         void Delete(Usuario usuario);
+
+        Usuario FindByEmail(string email);
     }
 }

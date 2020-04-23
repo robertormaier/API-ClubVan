@@ -17,6 +17,8 @@ namespace club.van.api.business.Interface
 
         List<Usuario> ObterTodos();
 
+        Usuario FindByEmail(string email);
+
         //Metodo Interno
         string CalculaHash(string Senha);
     }

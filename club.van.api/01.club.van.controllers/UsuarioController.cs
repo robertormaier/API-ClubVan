@@ -1,11 +1,18 @@
 ﻿using club.van.api.business.Interface;
 using club.van.api.data.dto.UsuarioArguments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace club.van.api.controllers
 {
+
     [Route("api/UsuarioController")]
     [ApiController]
     public class UsuarioController : ControllerBase
@@ -14,11 +21,16 @@ namespace club.van.api.controllers
 
         private ILogger<UsuarioController> logger;
 
-        public UsuarioController(IUsuarioBusiness usuarioBusiness, ILogger<UsuarioController> logger)
+        private IConfiguration config;
+
+
+        public UsuarioController(IUsuarioBusiness usuarioBusiness, ILogger<UsuarioController> logger, IConfiguration Configuration)
         {
             this.usuarioBusiness = usuarioBusiness;
 
             this.logger = logger;
+
+            this.config = Configuration;
         }
 
         [HttpGet]
@@ -28,7 +40,13 @@ namespace club.van.api.controllers
             try
             {
                 var response = this.usuarioBusiness.AutenticarUsuario(email, senha);
-                return base.Ok(response);
+
+                if (response == true)
+                {
+                    return base.Ok(GerarToken(email));
+                }
+
+                return BadRequest("Usuario ou senha invalida");
             }
             catch (System.Exception e)
             {
@@ -38,7 +56,7 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("ObterTodos")]
+        [Route("GetAll")]
         public IActionResult ObterTodos()
         {
             try
@@ -59,8 +77,8 @@ namespace club.van.api.controllers
         {
             try
             {
-                var response = this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
-                return base.Ok(response);
+                this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
+                return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
             }
             catch (System.Exception e)
             {
@@ -97,6 +115,24 @@ namespace club.van.api.controllers
                 this.logger.LogInformation($"Erro:{e.Message}");
                 return base.Ok(e);
             }
+        }
+
+
+        private string GerarToken(string email)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(config["AppSettings:Secret"]);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Issuer = config["AppSettings:Emissor"],
+                Audience = config["AppSettings:ValidoEm"],
+                Expires = DateTime.Now.AddMinutes(120),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
         }
     }
 }

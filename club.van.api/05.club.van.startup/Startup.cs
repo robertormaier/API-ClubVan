@@ -4,13 +4,16 @@ using club.van.api.dao.EF;
 using club.van.api.dao.Implementacao;
 using club.van.api.dao.Interface;
 using club.van.dao.Implementacao;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace club.van.api
 {
@@ -26,6 +29,7 @@ namespace club.van.api
 
         public void ConfigureServices(IServiceCollection services)
         {
+  
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
@@ -34,6 +38,8 @@ namespace club.van.api
             });
 
             services.AddScoped<ClubVanContext, ClubVanContext>();
+
+            services.AddSingleton<IConfiguration>(Configuration);
 
             //Usuario
             services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
@@ -58,6 +64,28 @@ namespace club.van.api
             services.AddTransient<IViagemDiasBusiness, ViagemDiasBusiness>();
             services.AddTransient<IViagemDiasDao, ViagemDiasDao>();
 
+
+            // JWT
+            var key = Encoding.ASCII.GetBytes(Configuration["AppSettings:Secret"]);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["AppSettings:ValidoEm"],
+                    ValidIssuer = Configuration["AppSettings:Emissor"]
+                };
+            });
         }
 
 
@@ -68,11 +96,11 @@ namespace club.van.api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
