@@ -1,3 +1,5 @@
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\club.van.api.exe
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\club.van.api.deps.json
@@ -5,6 +7,7 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\c
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\club.van.api.runtimeconfig.dev.json
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\club.van.api.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\club.van.api.pdb
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -26,7 +29,13 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\M
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Options.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Serilog.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Serilog.Extensions.Logging.File.dll
@@ -38,6 +47,7 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\S
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\System.Configuration.ConfigurationManager.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\System.Runtime.Caching.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
@@ -48,8 +58,12 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\r
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csprojAssemblyReference.cache
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.Rasources.Message.resources
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csproj.GenerateResource.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csproj.CoreCompileInputs.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.AssemblyInfoInputs.cache
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.AssemblyInfo.cs
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.RazorTargetAssemblyInfo.cache
@@ -59,17 +73,3 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\s
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.pdb
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.genruntimeconfig.cache
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Logging.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csproj.CoreCompileInputs.cache
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\appsettings.Development.json
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csprojAssemblyReference.cache

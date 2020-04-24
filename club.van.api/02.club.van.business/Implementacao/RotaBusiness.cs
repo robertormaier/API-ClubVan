@@ -40,6 +40,8 @@ namespace club.van.api.business.Implementacao
                 Veiculo = veiculo
             };
 
+            this.rotaDao.Salvar(rota);
+
             return new AdicionarRotaResponse(rota.Id);
         }
 

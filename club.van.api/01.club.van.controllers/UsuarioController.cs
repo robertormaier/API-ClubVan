@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,7 +11,7 @@ using System.Text;
 
 namespace club.van.api.controllers
 {
-
+    [Authorize]
     [Route("api/UsuarioController")]
     [ApiController]
     public class UsuarioController : ControllerBase
@@ -77,6 +76,8 @@ namespace club.van.api.controllers
         {
             try
             {
+
+
                 this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
                 return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
             }
@@ -127,7 +128,7 @@ namespace club.van.api.controllers
             {
                 Issuer = config["AppSettings:Emissor"],
                 Audience = config["AppSettings:ValidoEm"],
-                Expires = DateTime.Now.AddMinutes(120),
+                Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                 SecurityAlgorithms.HmacSha256Signature)
             };
