@@ -1,11 +1,14 @@
 ﻿using club.van.api.business.Interface;
+using club.van.api.dao.EF;
 using club.van.api.data.dto.RotaArguments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 
 namespace club.van.api.controllers
 {
+    [Authorize]
     [Route("api/RotaController")]
     [ApiController]
     public class RotaController : ControllerBase
@@ -41,30 +44,48 @@ namespace club.van.api.controllers
         [Route("Adicionar")]
         public IActionResult Adicionar([FromBody] AdicionarRotaRequest adicionarRotaRequest)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                var response = this.rotaBusiness.Adicionar(adicionarRotaRequest);
-                return base.Ok(response);
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.rotaBusiness.Adicionar(adicionarRotaRequest);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(Guid id)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                this.rotaBusiness.Delete(id);
-                return base.Ok();
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        this.rotaBusiness.Delete(id);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok();
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
     }

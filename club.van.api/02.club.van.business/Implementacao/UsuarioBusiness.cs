@@ -50,7 +50,7 @@ namespace club.van.api.business.Implementacao
                     usuario.Nome = adicionarUsuarioRequest.Nome;
                     usuario.Cpf = adicionarUsuarioRequest.Cpf;
                     usuario.Email = adicionarUsuarioRequest.Email;
-                    usuario.Senha = adicionarUsuarioRequest.Senha;
+                    usuario.Senha = this.CalculaHash(adicionarUsuarioRequest.Senha);
                     usuario.Perfil = perfil;
                     usuario.Ativo = true;
                     usuario.Empresa = empresa;
@@ -150,7 +150,7 @@ namespace club.van.api.business.Implementacao
                 usuario.Nome = atualizarUsuarioRequest.Nome;
                 usuario.Cpf = atualizarUsuarioRequest.Cpf;
                 usuario.Email = atualizarUsuarioRequest.Email;
-                usuario.Senha = atualizarUsuarioRequest.Senha;
+                usuario.Senha = this.CalculaHash(atualizarUsuarioRequest.Senha);
                 usuario.Perfil.Id = atualizarUsuarioRequest.PerfilId;
                 usuario.Ativo = atualizarUsuarioRequest.Ativo;
                 usuario.Empresa.Id = atualizarUsuarioRequest.EmpresaId;

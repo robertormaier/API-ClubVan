@@ -1,11 +1,14 @@
 ﻿using club.van.api.business.Interface;
+using club.van.api.dao.EF;
 using club.van.api.data.dto.ViagemDiasArguments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 
 namespace club.van.controllers
 {
+    [Authorize]
     [Route("api/ViagemDiaController")]
     [ApiController]
     public class ViagemDiaController : ControllerBase
@@ -40,30 +43,48 @@ namespace club.van.controllers
         [Route("Adicionar")]
         public IActionResult Adicionar([FromBody] AdicionarViagemDiasRequest adicionarViagemDiasRequest)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                var response = this.viagemDiasBusiness.AdicionarViagemDia(adicionarViagemDiasRequest);
-                return base.Ok(response);
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.viagemDiasBusiness.AdicionarViagemDia(adicionarViagemDiasRequest);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 
         [HttpPut("Update")]
         public IActionResult Update([FromBody] AtualizarViagemDiasRequest atualizarViagemDiasRequest)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                var response = this.viagemDiasBusiness.Update(atualizarViagemDiasRequest);
-                return base.Ok(response);
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.viagemDiasBusiness.Update(atualizarViagemDiasRequest);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 
@@ -71,15 +92,24 @@ namespace club.van.controllers
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(Guid id)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                this.viagemDiasBusiness.Delete(id);
-                return base.Ok();
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        this.viagemDiasBusiness.Delete(id);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok();
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
     }

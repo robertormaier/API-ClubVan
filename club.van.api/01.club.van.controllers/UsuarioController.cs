@@ -1,4 +1,5 @@
 ﻿using club.van.api.business.Interface;
+using club.van.api.dao.EF;
 using club.van.api.data.dto.UsuarioArguments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using System.Text;
 
 namespace club.van.api.controllers
 {
-    [Authorize]
+
     [Route("api/UsuarioController")]
     [ApiController]
     public class UsuarioController : ControllerBase
@@ -32,6 +33,7 @@ namespace club.van.api.controllers
             this.config = Configuration;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("AutenticarUsuario/{email}/{senha}")]
         public IActionResult AutenticarUsuario(string email, string senha)
@@ -54,6 +56,7 @@ namespace club.van.api.controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         [Route("GetAll")]
         public IActionResult ObterTodos()
@@ -70,51 +73,82 @@ namespace club.van.api.controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [Route("Adicionar")]
         public IActionResult Adicionar([FromBody] AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
-            try
-            {
 
-
-                this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
-                return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
-            }
-            catch (System.Exception e)
+            using (var context = new ClubVanContext())
             {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+
+                        return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
+
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 
+        [Authorize]
         [HttpPut("Update")]
         public IActionResult Update([FromBody] AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                var response = this.usuarioBusiness.Update(atualizarUsuarioRequest);
-                return base.Ok(response);
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.usuarioBusiness.Update(atualizarUsuarioRequest);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 
+        [Authorize]
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(Guid id)
         {
-            try
+            using (var context = new ClubVanContext())
             {
-                this.usuarioBusiness.Delete(id);
-                return base.Ok();
-            }
-            catch (System.Exception e)
-            {
-                this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        this.usuarioBusiness.Delete(id);
+                        context.SaveChanges();
+                        dbContextTransaction.Commit();
+                        return base.Ok();
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.Ok(e);
+                    }
+                }
             }
         }
 

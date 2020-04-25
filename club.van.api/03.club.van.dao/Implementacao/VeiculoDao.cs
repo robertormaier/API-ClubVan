@@ -29,13 +29,11 @@ namespace club.van.api.dao.Implementacao
         public void Salvar(Veiculo veiculo)
         {
             this.clubVanContext.Veiculos.Add(veiculo);
-            this.clubVanContext.SaveChanges();
         }
 
         public void Delete(Veiculo veiculo)
         {
             this.clubVanContext.Veiculos.Remove(veiculo);
-            this.clubVanContext.SaveChanges();
         }
     }
 }

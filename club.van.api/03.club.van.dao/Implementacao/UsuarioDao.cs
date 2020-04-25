@@ -47,13 +47,11 @@ namespace club.van.api.dao.Implementacao
         public void Salvar(Usuario usuario)
         {
             this.clubVanContext.Usuarios.Add(usuario);
-            this.clubVanContext.SaveChanges();
         }
 
         public void Delete(Usuario usuario)
         {
             this.clubVanContext.Usuarios.Remove(usuario);
-            this.clubVanContext.SaveChanges();
         }
 
         public Usuario FindByEmail(string email)
