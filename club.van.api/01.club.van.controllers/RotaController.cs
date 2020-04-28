@@ -1,6 +1,7 @@
 ﻿using club.van.api.business.Interface;
 using club.van.api.dao.EF;
 using club.van.api.data.dto.RotaArguments;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,6 @@ using System;
 
 namespace club.van.api.controllers
 {
-    [Authorize]
     [Route("api/RotaController")]
     [ApiController]
     public class RotaController : ControllerBase
@@ -25,6 +25,7 @@ namespace club.van.api.controllers
 
         [HttpGet]
         [Route("GetAll")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodas()
         {
             try
@@ -35,13 +36,14 @@ namespace club.van.api.controllers
             catch (System.Exception e)
             {
                 this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                return BadRequest(e);
             }
 
         }
 
         [HttpPost]
         [Route("Adicionar")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarRotaRequest adicionarRotaRequest)
         {
             using (var context = new ClubVanContext())
@@ -51,7 +53,6 @@ namespace club.van.api.controllers
                     try
                     {
                         var response = this.rotaBusiness.Adicionar(adicionarRotaRequest);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok(response);
                     }
@@ -59,13 +60,15 @@ namespace club.van.api.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return BadRequest(e);
                     }
                 }
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())
@@ -75,7 +78,6 @@ namespace club.van.api.controllers
                     try
                     {
                         this.rotaBusiness.Delete(id);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok();
                     }
@@ -83,7 +85,7 @@ namespace club.van.api.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return BadRequest(e);
                     }
                 }
             }

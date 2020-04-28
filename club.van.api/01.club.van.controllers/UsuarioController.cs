@@ -1,6 +1,7 @@
 ﻿using club.van.api.business.Interface;
 using club.van.api.dao.EF;
 using club.van.api.data.dto.UsuarioArguments;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -47,18 +48,18 @@ namespace club.van.api.controllers
                     return base.Ok(GerarToken(email));
                 }
 
-                return BadRequest("Usuario ou senha invalida");
+                return BadRequest("Nenhum usuário encontrado");
             }
             catch (System.Exception e)
             {
                 this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                return base.BadRequest(e);
             }
         }
 
-        [Authorize]
         [HttpGet]
         [Route("GetAll")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodos()
         {
             try
@@ -69,13 +70,13 @@ namespace club.van.api.controllers
             catch (System.Exception e)
             {
                 this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                return BadRequest(e);
             }
         }
 
-        [Authorize]
         [HttpPost]
         [Route("Adicionar")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
 
@@ -86,9 +87,7 @@ namespace club.van.api.controllers
                     try
                     {
                         this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
-
                         return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
 
                     }
@@ -96,14 +95,15 @@ namespace club.van.api.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return base.BadRequest(e);
                     }
                 }
             }
         }
 
-        [Authorize]
-        [HttpPut("Update")]
+        [HttpPut]
+        [Route("Update")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Update([FromBody] AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
             using (var context = new ClubVanContext())
@@ -113,7 +113,6 @@ namespace club.van.api.controllers
                     try
                     {
                         var response = this.usuarioBusiness.Update(atualizarUsuarioRequest);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok(response);
                     }
@@ -121,14 +120,15 @@ namespace club.van.api.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return base.BadRequest(e);
                     }
                 }
             }
         }
 
-        [Authorize]
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())
@@ -138,7 +138,6 @@ namespace club.van.api.controllers
                     try
                     {
                         this.usuarioBusiness.Delete(id);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok();
                     }
@@ -146,7 +145,7 @@ namespace club.van.api.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return base.BadRequest(e);
                     }
                 }
             }

@@ -4,6 +4,7 @@ namespace club.van.api.data.dto.ViagemDiasArguments
 {
     public class AtualizarViagemDiasRequest
     {
+        public Guid Id { get; set; }
         public int NumeroSemana { get; set; }
         public bool SegundaFeira { get; set; }
         public bool TercaFeira { get; set; }

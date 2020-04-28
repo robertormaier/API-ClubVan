@@ -1,6 +1,7 @@
 ﻿using club.van.api.business.Interface;
 using club.van.api.dao.EF;
 using club.van.api.data.dto.ViagemDiasArguments;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,7 @@ using System;
 
 namespace club.van.controllers
 {
-    [Authorize]
+
     [Route("api/ViagemDiaController")]
     [ApiController]
     public class ViagemDiaController : ControllerBase
@@ -25,6 +26,7 @@ namespace club.van.controllers
 
         [HttpGet]
         [Route("GetAll/{usuarioId}/{empresaId}/{numeroSemana}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodos(Guid usuarioId, Guid empresaId, int numeroSemana)
         {
             try
@@ -35,12 +37,13 @@ namespace club.van.controllers
             catch (System.Exception e)
             {
                 this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                return BadRequest(e);
             }
         }
 
         [HttpPost]
         [Route("Adicionar")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarViagemDiasRequest adicionarViagemDiasRequest)
         {
             using (var context = new ClubVanContext())
@@ -50,7 +53,6 @@ namespace club.van.controllers
                     try
                     {
                         var response = this.viagemDiasBusiness.AdicionarViagemDia(adicionarViagemDiasRequest);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok(response);
                     }
@@ -58,13 +60,15 @@ namespace club.van.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return BadRequest(e);
                     }
                 }
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut]
+        [Route("Update")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Update([FromBody] AtualizarViagemDiasRequest atualizarViagemDiasRequest)
         {
             using (var context = new ClubVanContext())
@@ -74,7 +78,6 @@ namespace club.van.controllers
                     try
                     {
                         var response = this.viagemDiasBusiness.Update(atualizarViagemDiasRequest);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok(response);
                     }
@@ -82,14 +85,16 @@ namespace club.van.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return BadRequest(e);
                     }
                 }
             }
         }
 
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete]
+        [Route("Delete/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())
@@ -99,7 +104,6 @@ namespace club.van.controllers
                     try
                     {
                         this.viagemDiasBusiness.Delete(id);
-                        context.SaveChanges();
                         dbContextTransaction.Commit();
                         return base.Ok();
                     }
@@ -107,7 +111,7 @@ namespace club.van.controllers
                     {
                         dbContextTransaction.Rollback();
                         this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.Ok(e);
+                        return BadRequest(e);
                     }
                 }
             }

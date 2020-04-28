@@ -19,6 +19,7 @@ namespace club.van.dao.Implementacao
         public void Delete(ViagemDia viagemDia)
         {
             this.clubVanContext.ViagemDias.Remove(viagemDia);
+            this.clubVanContext.SaveChanges();
         }
 
         public ViagemDia Obter(Guid id)
@@ -35,7 +36,8 @@ namespace club.van.dao.Implementacao
 
         public void Salvar(ViagemDia viagemDias)
         {
-            this.clubVanContext.ViagemDias.Add(viagemDias);
+            this.clubVanContext.ViagemDias.Update(viagemDias);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

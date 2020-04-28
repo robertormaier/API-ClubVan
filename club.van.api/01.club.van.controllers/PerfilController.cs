@@ -1,11 +1,12 @@
 ﻿using club.van.api.business.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace club.van.api.controllers
 {
-    [Authorize]
+ 
     [Route("api/PerfilController")]
     [ApiController]
     public class PerfilController : ControllerBase
@@ -21,7 +22,8 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]                                                                                                            
+        [Route("GetAll")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodos()
         {
             try
@@ -32,7 +34,7 @@ namespace club.van.api.controllers
             catch (System.Exception e)
             {
                 this.logger.LogInformation($"Erro:{e.Message}");
-                return base.Ok(e);
+                return BadRequest(e);
             }
         }
     }

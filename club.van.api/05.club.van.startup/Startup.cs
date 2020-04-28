@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 using System.Text;
 
 namespace club.van.api
@@ -29,8 +30,9 @@ namespace club.van.api
 
         public void ConfigureServices(IServiceCollection services)
         {
-  
-            services.AddControllers();
+
+            services.AddControllers()
+                     .AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {

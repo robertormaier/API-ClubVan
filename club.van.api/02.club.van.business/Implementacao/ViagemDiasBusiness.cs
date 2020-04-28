@@ -81,6 +81,9 @@ namespace club.van.api.business.Implementacao
 
         public AtualizarViagemDiasResponse Update(AtualizarViagemDiasRequest atualizarViagemDiasRequest)
         {
+            if (atualizarViagemDiasRequest.Id == Guid.Empty)
+                throw new Exception("id não poder vazio");
+
             var usuario = this.usuarioDao.Obter(atualizarViagemDiasRequest.UsuarioId);
             if (usuario == null)
                 throw new Exception("Nenhum usuario econtrada com esse id");
@@ -89,23 +92,24 @@ namespace club.van.api.business.Implementacao
             if (rota == null)
                 throw new Exception("Nenhuma rota econtrada com esse id");
 
-            var viagemdia = new ViagemDia()
-            {
-                NumeroSemana = atualizarViagemDiasRequest.NumeroSemana,
-                SegundaFeira = atualizarViagemDiasRequest.SegundaFeira,
-                TercaFeira = atualizarViagemDiasRequest.TercaFeira,
-                QuartaFeira = atualizarViagemDiasRequest.QuartaFeira,
-                QuintaFeira = atualizarViagemDiasRequest.QuintaFeira,
-                SextaFeira = atualizarViagemDiasRequest.SextaFeira,
-                Sabado = atualizarViagemDiasRequest.Sabado,
-                Domingo = atualizarViagemDiasRequest.Domingo,
-                Rota = rota,
-                Usuario = usuario
-            };
+            var viagemDia = this.viagemDiasDao.Obter(atualizarViagemDiasRequest.Id);
+            if (viagemDia == null)
+                throw new Exception("Nenhuma viagem econtrada com esse id");
 
-            this.viagemDiasDao.Salvar(viagemdia);
+            viagemDia.NumeroSemana = atualizarViagemDiasRequest.NumeroSemana;
+            viagemDia.SegundaFeira = atualizarViagemDiasRequest.SegundaFeira;
+            viagemDia.TercaFeira = atualizarViagemDiasRequest.TercaFeira;
+            viagemDia.QuartaFeira = atualizarViagemDiasRequest.QuartaFeira;
+            viagemDia.QuintaFeira = atualizarViagemDiasRequest.QuintaFeira;
+            viagemDia.SextaFeira = atualizarViagemDiasRequest.SextaFeira;
+            viagemDia.Sabado = atualizarViagemDiasRequest.Sabado;
+            viagemDia.Domingo = atualizarViagemDiasRequest.Domingo;
+            viagemDia.Rota = rota;
+            viagemDia.Usuario = usuario;
 
-            return new AtualizarViagemDiasResponse(viagemdia);
+            this.viagemDiasDao.Salvar(viagemDia);
+
+            return new AtualizarViagemDiasResponse(viagemDia);
         }
     }
 }

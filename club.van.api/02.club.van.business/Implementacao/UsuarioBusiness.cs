@@ -76,7 +76,7 @@ namespace club.van.api.business.Implementacao
             var response = this.usuarioDao.Obter(email, senhaHash);
 
             if (response == null)
-                throw new Exception("Nenhum usuario encontrado");
+                throw new Exception("Senha ou login inválido");
             else
                 return true;
         }
@@ -142,24 +142,38 @@ namespace club.van.api.business.Implementacao
 
         public AtualizarUsuarioResponse Update(AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
-            if (atualizarUsuarioRequest.Id == null)
+            if (atualizarUsuarioRequest.Id == Guid.Empty)
                 throw new Exception("O id não pode estar vazio");
 
-            Usuario usuario = new Usuario();
-            {
-                usuario.Nome = atualizarUsuarioRequest.Nome;
-                usuario.Cpf = atualizarUsuarioRequest.Cpf;
-                usuario.Email = atualizarUsuarioRequest.Email;
-                usuario.Senha = this.CalculaHash(atualizarUsuarioRequest.Senha);
-                usuario.Perfil.Id = atualizarUsuarioRequest.PerfilId;
-                usuario.Ativo = atualizarUsuarioRequest.Ativo;
-                usuario.Empresa.Id = atualizarUsuarioRequest.EmpresaId;
-                usuario.Bairro = atualizarUsuarioRequest.Bairro;
-                usuario.Rua = atualizarUsuarioRequest.Rua;
-                usuario.Cidade = atualizarUsuarioRequest.Cidade;
-                usuario.Uf = atualizarUsuarioRequest.Uf;
-                usuario.Rota.Id = atualizarUsuarioRequest.RotaId;
-            }
+            var perfil = this.perfilDao.Obter(atualizarUsuarioRequest.PerfilId);
+            if (perfil == null)
+                throw new Exception("Nenhum perfil econtrado com esse id");
+
+            var empresa = this.empresaDao.Obter(atualizarUsuarioRequest.EmpresaId);
+            if (empresa == null)
+                throw new Exception("Nenhuma empresa econtrada com esse id");
+
+            var rota = this.rotaDao.Obter(atualizarUsuarioRequest.RotaId);
+            if (rota == null)
+                throw new Exception("Nenhuma rota econtrada com esse id");
+
+            var usuario = this.usuarioDao.Obter(atualizarUsuarioRequest.Id);
+            if (usuario == null)
+                throw new Exception("Nenhuma usuario econtrada com esse id");
+
+
+            usuario.Nome = atualizarUsuarioRequest.Nome;
+            usuario.Cpf = atualizarUsuarioRequest.Cpf;
+            usuario.Email = atualizarUsuarioRequest.Email;
+            usuario.Senha = this.CalculaHash(atualizarUsuarioRequest.Senha);
+            usuario.Perfil = perfil;
+            usuario.Ativo = atualizarUsuarioRequest.Ativo;
+            usuario.Empresa = empresa;
+            usuario.Bairro = atualizarUsuarioRequest.Bairro;
+            usuario.Rua = atualizarUsuarioRequest.Rua;
+            usuario.Cidade = atualizarUsuarioRequest.Cidade;
+            usuario.Uf = atualizarUsuarioRequest.Uf;
+            usuario.Rota = rota;
 
             this.usuarioDao.Salvar(usuario);
 

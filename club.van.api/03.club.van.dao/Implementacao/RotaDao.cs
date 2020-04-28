@@ -33,11 +33,13 @@ namespace club.van.api.dao.Implementacao
         public void Salvar(Rota rota)
         {
             this.clubVanContext.Rotas.Add(rota);
+            this.clubVanContext.SaveChanges();
         }
 
         public void Delete(Rota rota)
         {
             this.clubVanContext.Rotas.Remove(rota);
+            this.clubVanContext.SaveChanges();
         }
     }
 }
