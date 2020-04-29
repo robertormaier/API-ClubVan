@@ -25,7 +25,7 @@ namespace club.van.api.controllers
 
         [HttpGet]
         [Route("GetAll")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodas()
         {
             try
@@ -43,7 +43,7 @@ namespace club.van.api.controllers
 
         [HttpPost]
         [Route("Adicionar")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarRotaRequest adicionarRotaRequest)
         {
             using (var context = new ClubVanContext())
@@ -68,7 +68,7 @@ namespace club.van.api.controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())

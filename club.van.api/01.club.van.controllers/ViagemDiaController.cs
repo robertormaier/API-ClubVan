@@ -25,13 +25,13 @@ namespace club.van.controllers
         }
 
         [HttpGet]
-        [Route("GetAll/{usuarioId}/{empresaId}/{numeroSemana}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult ObterTodos(Guid usuarioId, Guid empresaId, int numeroSemana)
+        [Route("GetAll/{usuarioId}/{rotaId}/{numeroSemana}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult ObterTodos(Guid usuarioId, Guid rotaId, int numeroSemana)
         {
             try
             {
-                var response = this.viagemDiasBusiness.ObterTodos(usuarioId, empresaId, numeroSemana);
+                var response = this.viagemDiasBusiness.ObterTodos(usuarioId, rotaId, numeroSemana);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -43,7 +43,7 @@ namespace club.van.controllers
 
         [HttpPost]
         [Route("Adicionar")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarViagemDiasRequest adicionarViagemDiasRequest)
         {
             using (var context = new ClubVanContext())
@@ -68,7 +68,7 @@ namespace club.van.controllers
 
         [HttpPut]
         [Route("Update")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Update([FromBody] AtualizarViagemDiasRequest atualizarViagemDiasRequest)
         {
             using (var context = new ClubVanContext())
@@ -94,7 +94,7 @@ namespace club.van.controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())

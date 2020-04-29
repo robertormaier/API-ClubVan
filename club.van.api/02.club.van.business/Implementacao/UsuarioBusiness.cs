@@ -175,7 +175,7 @@ namespace club.van.api.business.Implementacao
             usuario.Uf = atualizarUsuarioRequest.Uf;
             usuario.Rota = rota;
 
-            this.usuarioDao.Salvar(usuario);
+            this.usuarioDao.Atualizar(usuario);
 
             return new AtualizarUsuarioResponse(usuario);
         }

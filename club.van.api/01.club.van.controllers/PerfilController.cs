@@ -23,7 +23,7 @@ namespace club.van.api.controllers
 
         [HttpGet]
         [Route("GetAll")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+      //  [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodos()
         {
             try

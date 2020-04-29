@@ -40,13 +40,16 @@ namespace club.van.api.dao.Implementacao
                 .Include(x => x.Perfil)
                 .Include(x => x.Empresa)
                 .Include(x => x.Rota)
+                    .ThenInclude(rota => rota.Veiculo)
+                .Include(x => x.Rota)
+                    .ThenInclude(rota => rota.Empresa)
                 .Where(x => x.Ativo == true)
                 .ToList();
         }
 
         public void Salvar(Usuario usuario)
         {
-            this.clubVanContext.Usuarios.Update(usuario);
+            this.clubVanContext.Usuarios.Add(usuario);
             this.clubVanContext.SaveChanges();
         }
 
@@ -59,6 +62,12 @@ namespace club.van.api.dao.Implementacao
         public Usuario FindByEmail(string email)
         {
             return this.clubVanContext.Usuarios.Find(email);
+        }
+
+        public void Atualizar(Usuario usuario)
+        {
+            this.clubVanContext.Usuarios.Update(usuario);
+            this.clubVanContext.SaveChanges();
         }
     }
 }

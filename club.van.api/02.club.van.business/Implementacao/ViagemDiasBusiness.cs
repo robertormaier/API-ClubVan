@@ -107,7 +107,7 @@ namespace club.van.api.business.Implementacao
             viagemDia.Rota = rota;
             viagemDia.Usuario = usuario;
 
-            this.viagemDiasDao.Salvar(viagemDia);
+            this.viagemDiasDao.Atualizar(viagemDia);
 
             return new AtualizarViagemDiasResponse(viagemDia);
         }
