@@ -35,20 +35,20 @@ namespace club.van.api.controllers
         }
 
         [AllowAnonymous]
-        [HttpGet]
-        [Route("AutenticarUsuario/{email}/{senha}")]
-        public IActionResult AutenticarUsuario(string email, string senha)
+        [HttpPost]
+        [Route("AutenticarUsuario")]
+        public IActionResult AutenticarUsuario([FromBody] AutenticarUsuarioRequest autenticarUsuarioRequest)
         {
             try
             {
-                var response = this.usuarioBusiness.AutenticarUsuario(email, senha);
+                var response = this.usuarioBusiness.AutenticarUsuario(autenticarUsuarioRequest.Email, autenticarUsuarioRequest.Password);
 
-                if (response == true)
+                if (response != null)
                 {
-                    return base.Ok(GerarToken(email));
+                    Response.Headers.Add("Authorization", this.GerarToken(autenticarUsuarioRequest.Email));
+                    return base.Ok(response);
                 }
-
-                return BadRequest("Nenhum usuário encontrado");
+                return base.NotFound("Nenhum usuário encontrado");
             }
             catch (System.Exception e)
             {

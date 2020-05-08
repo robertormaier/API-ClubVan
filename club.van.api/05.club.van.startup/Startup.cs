@@ -30,6 +30,7 @@ namespace club.van.api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
 
             services.AddControllers()
                      .AddNewtonsoftJson();
@@ -97,6 +98,8 @@ namespace club.van.api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors(options =>
+            options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
 

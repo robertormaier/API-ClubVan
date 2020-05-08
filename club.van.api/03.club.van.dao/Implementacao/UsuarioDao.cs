@@ -25,7 +25,14 @@ namespace club.van.api.dao.Implementacao
 
         public Usuario Obter(string email, string senha)
         {
-            return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Email == email && x.Senha == senha);
+            return this.clubVanContext.Usuarios.
+                 Include(x => x.Perfil)
+                .Include(x => x.Empresa)
+                .Include(x => x.Rota)
+                    .ThenInclude(rota => rota.Veiculo)
+                .Include(x => x.Rota)
+                    .ThenInclude(rota => rota.Empresa).
+                    FirstOrDefault(x => x.Email == email && x.Senha == senha);
         }
 
         public Usuario Obter(Guid id)

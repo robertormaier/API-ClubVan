@@ -69,16 +69,16 @@ namespace club.van.api.business.Implementacao
             throw new Exception("Não foi possivel adicionar o usuário");
         }
 
-        public bool AutenticarUsuario(string email, string senha)
+        public Usuario AutenticarUsuario(string email, string senha)
         {
             var senhaHash = this.CalculaHash(senha);
 
             var response = this.usuarioDao.Obter(email, senhaHash);
 
             if (response == null)
-                throw new Exception("Senha ou login inválido");
+                return null;
             else
-                return true;
+                return response;
         }
 
         private bool ValidarUsuario(AdicionarUsuarioRequest AdicionarUsuarioRequest)
