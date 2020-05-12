@@ -168,6 +168,9 @@ namespace club.van.api.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<Guid?>("EMPRESA_ID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Modelo")
                         .HasColumnName("MODELO")
                         .HasColumnType("nvarchar(50)")
@@ -179,6 +182,8 @@ namespace club.van.api.Migrations
                         .HasMaxLength(50);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EMPRESA_ID");
 
                     b.ToTable("VEICULO");
                 });
@@ -260,6 +265,13 @@ namespace club.van.api.Migrations
                     b.HasOne("club.van.api.data.Rota", "Rota")
                         .WithMany()
                         .HasForeignKey("ROTA_ID");
+                });
+
+            modelBuilder.Entity("club.van.api.data.Veiculo", b =>
+                {
+                    b.HasOne("club.van.api.data.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EMPRESA_ID");
                 });
 
             modelBuilder.Entity("club.van.api.data.ViagemDia", b =>

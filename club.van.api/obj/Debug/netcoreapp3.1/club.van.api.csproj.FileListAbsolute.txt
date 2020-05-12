@@ -75,3 +75,4 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Debug\netcoreapp3.1\N
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csproj.CoreCompileInputs.cache
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Debug\netcoreapp3.1\club.van.api.csprojAssemblyReference.cache

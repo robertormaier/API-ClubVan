@@ -15,6 +15,8 @@ namespace club.van.api.dao.EF.Map
             builder.Property(x => x.Placa).HasColumnName("PLACA").HasMaxLength(50);
             builder.Property(x => x.Modelo).HasColumnName("MODELO").HasMaxLength(50);
             builder.Property(x => x.Descricao).HasColumnName("DESCRICAO").HasMaxLength(50);
+
+            builder.HasOne(x => x.Empresa).WithMany().HasForeignKey("EMPRESA_ID");
         }
     }
 }

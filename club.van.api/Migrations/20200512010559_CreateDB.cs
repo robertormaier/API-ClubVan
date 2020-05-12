@@ -41,11 +41,18 @@ namespace club.van.api.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     PLACA = table.Column<string>(maxLength: 50, nullable: true),
                     MODELO = table.Column<string>(maxLength: 50, nullable: true),
-                    DESCRICAO = table.Column<string>(maxLength: 50, nullable: true)
+                    DESCRICAO = table.Column<string>(maxLength: 50, nullable: true),
+                    EMPRESA_ID = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VEICULO", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VEICULO_EMPRESA_EMPRESA_ID",
+                        column: x => x.EMPRESA_ID,
+                        principalTable: "EMPRESA",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -174,6 +181,11 @@ namespace club.van.api.Migrations
                 column: "ROTA_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_VEICULO_EMPRESA_ID",
+                table: "VEICULO",
+                column: "EMPRESA_ID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VIAGEM_DIA_ROTA_ID",
                 table: "VIAGEM_DIA",
                 column: "ROTA_ID");
@@ -199,10 +211,10 @@ namespace club.van.api.Migrations
                 name: "ROTA");
 
             migrationBuilder.DropTable(
-                name: "EMPRESA");
+                name: "VEICULO");
 
             migrationBuilder.DropTable(
-                name: "VEICULO");
+                name: "EMPRESA");
         }
     }
 }

@@ -12,18 +12,29 @@ namespace club.van.api.business.Implementacao
 
         private IVeiculoDao veiculoDao;
 
-        public VeiculoBusiness(IVeiculoDao veiculoDao)
+        private IEmpresaDao empresaDao;
+
+        public VeiculoBusiness(IVeiculoDao veiculoDao,IEmpresaDao empresaDao)
         {
             this.veiculoDao = veiculoDao;
+
+            this.empresaDao = empresaDao;
         }
 
         public AdicionarVeiculoResponse AdicionarVeiculo(AdicionarVeiculoRequest adicionarVeiculoRequest)
         {
+
+
+            var empresa = this.empresaDao.Obter(adicionarVeiculoRequest.EmpresaId);
+            if (empresa == null)
+                throw new Exception("Nenhuma empresa econtrada com esse id");
+
             var veiculo = new Veiculo()
             {
                 Descricao = adicionarVeiculoRequest.Descricao,
-                Modelo = adicionarVeiculoRequest.Modelo,
-                Placa = adicionarVeiculoRequest.Placa
+                Modelo = adicionarVeiculoRequest.Modelo.ToUpper(),
+                Placa = adicionarVeiculoRequest.Placa.ToUpper(),
+                Empresa =  empresa,
             };
 
             this.veiculoDao.Salvar(veiculo);

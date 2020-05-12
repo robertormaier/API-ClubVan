@@ -1,6 +1,7 @@
 ﻿using club.van.api.dao.EF;
 using club.van.api.dao.Interface;
 using club.van.api.data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,9 @@ namespace club.van.api.dao.Implementacao
 
         public List<Veiculo> ObterTodos()
         {
-            return this.clubVanContext.Veiculos.ToList();
+            return this.clubVanContext.Veiculos
+                        .Include(x => x.Empresa)
+                        .ToList();
         }
 
         public void Salvar(Veiculo veiculo)

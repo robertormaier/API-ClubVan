@@ -89,7 +89,6 @@ namespace club.van.api.controllers
                         this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
                         dbContextTransaction.Commit();
                         return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
-
                     }
                     catch (System.Exception e)
                     {
