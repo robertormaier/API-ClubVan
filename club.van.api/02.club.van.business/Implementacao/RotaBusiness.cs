@@ -55,9 +55,11 @@ namespace club.van.api.business.Implementacao
             this.rotaDao.Delete(rota);
         }
 
-        public List<Rota> ObterTodas()
+        public List<Rota> ObterTodas(string empresaId)
         {
-            return this.rotaDao.ObterTodas();
+            var empresaid = Guid.Parse(empresaId);
+
+            return this.rotaDao.ObterTodas(empresaid);
         }
     }
 }

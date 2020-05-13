@@ -22,12 +22,12 @@ namespace club.van.api.dao.Implementacao
             return this.clubVanContext.Rotas.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Rota> ObterTodas()
+        public List<Rota> ObterTodas(Guid empresaId)
         {
             return this.clubVanContext.Rotas.
                  Include(x => x.Veiculo)
                 .Include(x => x.Empresa)
-                .ToList();
+                .Where(x => x.Empresa.Id == empresaId).ToList();
         }
 
         public void Salvar(Rota rota)

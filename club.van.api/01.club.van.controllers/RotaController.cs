@@ -24,13 +24,13 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAll/{empresaId}")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult ObterTodas()
+        public IActionResult ObterTodas(string empresaId)
         {
             try
             {
-                var response = this.rotaBusiness.ObterTodas();
+                var response = this.rotaBusiness.ObterTodas(empresaId);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -68,7 +68,7 @@ namespace club.van.api.controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-       // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())

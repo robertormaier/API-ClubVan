@@ -6,7 +6,7 @@ namespace club.van.api.dao.Interface
 {
     public interface IRotaDao
     {
-        List<Rota> ObterTodas();
+        List<Rota> ObterTodas(Guid empresaId);
 
         Rota Obter(Guid id);
 

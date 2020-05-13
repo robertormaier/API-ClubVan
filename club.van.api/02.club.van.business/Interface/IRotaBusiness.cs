@@ -8,7 +8,7 @@ namespace club.van.api.business.Interface
     public interface IRotaBusiness
     {
 
-        List<Rota> ObterTodas();
+        List<Rota> ObterTodas(string empresaId);
 
         AdicionarRotaResponse Adicionar(AdicionarRotaRequest adicionarRotaRequest);
 
