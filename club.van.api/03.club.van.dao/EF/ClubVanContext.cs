@@ -20,6 +20,9 @@ namespace club.van.api.dao.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Usuario>().Ignore(x => x.Token);
+
             modelBuilder.ApplyConfiguration(new MapEmpresa());
             modelBuilder.ApplyConfiguration(new MapPerfil());
             modelBuilder.ApplyConfiguration(new MapRota());

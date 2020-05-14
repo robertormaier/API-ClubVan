@@ -1,4 +1,5 @@
 ﻿using club.van.api.data.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace club.van.api.data
 {
@@ -16,5 +17,8 @@ namespace club.van.api.data
         public string Cidade { get; set; }
         public string Uf { get; set; }
         public Rota Rota { get; set; }
+
+        [NotMapped]
+        public string Token { get; set; }
     }
 }

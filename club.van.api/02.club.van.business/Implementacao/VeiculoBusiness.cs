@@ -23,8 +23,6 @@ namespace club.van.api.business.Implementacao
 
         public AdicionarVeiculoResponse AdicionarVeiculo(AdicionarVeiculoRequest adicionarVeiculoRequest)
         {
-
-
             var empresa = this.empresaDao.Obter(adicionarVeiculoRequest.EmpresaId);
             if (empresa == null)
                 throw new Exception("Nenhuma empresa econtrada com esse id");
@@ -52,9 +50,9 @@ namespace club.van.api.business.Implementacao
             this.veiculoDao.Delete(veiculo);
         }
 
-        public List<Veiculo> ObterTodos()
+        public List<Veiculo> ObterTodos(Guid empresaId)
         {
-            return this.veiculoDao.ObterTodos();
+            return this.veiculoDao.ObterTodos(empresaId);
         }
     }
 }

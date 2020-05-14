@@ -11,7 +11,7 @@ namespace club.van.api.business.Interface
 
         void Delete(Guid id);
 
-        List<Veiculo> ObterTodos();
+        List<Veiculo> ObterTodos(Guid empresaId);
 
     }
 }

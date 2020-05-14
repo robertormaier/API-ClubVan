@@ -22,10 +22,11 @@ namespace club.van.api.dao.Implementacao
             return this.clubVanContext.Veiculos.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Veiculo> ObterTodos()
+        public List<Veiculo> ObterTodos(Guid empresaId)
         {
             return this.clubVanContext.Veiculos
                         .Include(x => x.Empresa)
+                        .Where(x => x.Empresa.Id == empresaId)
                         .ToList();
         }
 

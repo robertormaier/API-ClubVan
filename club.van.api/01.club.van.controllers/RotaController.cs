@@ -43,7 +43,7 @@ namespace club.van.api.controllers
 
         [HttpPost]
         [Route("Adicionar")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarRotaRequest adicionarRotaRequest)
         {
             using (var context = new ClubVanContext())

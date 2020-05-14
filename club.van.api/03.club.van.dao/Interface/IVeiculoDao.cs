@@ -6,7 +6,7 @@ namespace club.van.api.dao.Interface
 {
     public interface IVeiculoDao
     {
-        List<Veiculo> ObterTodos();
+        List<Veiculo> ObterTodos(Guid empresaId);
 
         Veiculo Obter(Guid id);
 

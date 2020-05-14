@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Expressions;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -45,7 +46,7 @@ namespace club.van.api.controllers
 
                 if (response != null)
                 {
-                    Response.Headers.Add("Authorization", this.GerarToken(autenticarUsuarioRequest.Email));
+                    response.Token = this.GerarToken(autenticarUsuarioRequest.Email);
                     return base.Ok(response);
                 }
                 return base.NotFound("Nenhum usuário encontrado");

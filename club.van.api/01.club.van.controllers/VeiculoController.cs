@@ -26,12 +26,12 @@ namespace club.van.api.controllers
 
         [HttpGet]
         [Route("GetAll")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult ObterTodos()
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult ObterTodos([FromQuery] ObterVeiculoRequest obterVeiculoRequest)
         {
             try
             {
-                var response = this.veiculoBusiness.ObterTodos();
+                var response = this.veiculoBusiness.ObterTodos(obterVeiculoRequest.EmpresaId);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -43,7 +43,7 @@ namespace club.van.api.controllers
 
         [HttpPost]
         [Route("Adicionar")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarVeiculoRequest adicionarVeiculoRequest)
         {
             using (var context = new ClubVanContext())
