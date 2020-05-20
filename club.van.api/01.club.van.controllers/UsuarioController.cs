@@ -77,7 +77,7 @@ namespace club.van.api.controllers
 
         [HttpPost]
         [Route("Adicionar")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Adicionar([FromBody] AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
 
@@ -87,9 +87,9 @@ namespace club.van.api.controllers
                 {
                     try
                     {
-                        this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
+                        var response = this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
                         dbContextTransaction.Commit();
-                        return base.Ok(GerarToken(adicionarUsuarioRequest.Email));
+                        return base.Ok(response);
                     }
                     catch (System.Exception e)
                     {

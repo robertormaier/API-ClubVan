@@ -25,7 +25,7 @@ namespace club.van.api.controllers
 
         [HttpGet]
         [Route("GetAll/{empresaId}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodas(string empresaId)
         {
             try

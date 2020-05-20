@@ -25,13 +25,13 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAll/{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult ObterTodos([FromQuery] ObterVeiculoRequest obterVeiculoRequest)
+        public IActionResult ObterTodos(string id)
         {
             try
             {
-                var response = this.veiculoBusiness.ObterTodos(obterVeiculoRequest.EmpresaId);
+                var response = this.veiculoBusiness.ObterTodos(id);
                 return base.Ok(response);
             }
             catch (System.Exception e)

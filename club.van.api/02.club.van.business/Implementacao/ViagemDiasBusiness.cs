@@ -4,6 +4,7 @@ using club.van.api.data;
 using club.van.api.data.dto.ViagemDiasArguments;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace club.van.api.business.Implementacao
 {
@@ -79,37 +80,78 @@ namespace club.van.api.business.Implementacao
 
         }
 
-        public AtualizarViagemDiasResponse Update(AtualizarViagemDiasRequest atualizarViagemDiasRequest)
+        public SalvarViagemDiasResponse Salvar(SalvarViagemDiasRequest atualizarViagemDiasRequest)
         {
             if (atualizarViagemDiasRequest.Id == Guid.Empty)
-                throw new Exception("id não poder vazio");
+            {
+                var usuario = this.usuarioDao.Obter(atualizarViagemDiasRequest.UsuarioId);
+                if (usuario == null)
+                    throw new Exception("Nenhum usuario econtrada com esse id");
 
-            var usuario = this.usuarioDao.Obter(atualizarViagemDiasRequest.UsuarioId);
-            if (usuario == null)
-                throw new Exception("Nenhum usuario econtrada com esse id");
+                var rota = this.rotaDao.Obter(usuario.Rota.Id);
+                if (rota == null)
+                    throw new Exception("Nenhuma rota econtrada com esse id");
 
-            var rota = this.rotaDao.Obter(atualizarViagemDiasRequest.RotaId);
-            if (rota == null)
-                throw new Exception("Nenhuma rota econtrada com esse id");
+                var viagemDia = this.viagemDiasDao.Obter(atualizarViagemDiasRequest.Id);
+                if (viagemDia == null)
+                    throw new Exception("Nenhuma viagem econtrada com esse id");
 
-            var viagemDia = this.viagemDiasDao.Obter(atualizarViagemDiasRequest.Id);
-            if (viagemDia == null)
-                throw new Exception("Nenhuma viagem econtrada com esse id");
+                var numeroSemana = GetWeekInyear(DateTime.Now);
 
-            viagemDia.NumeroSemana = atualizarViagemDiasRequest.NumeroSemana;
-            viagemDia.SegundaFeira = atualizarViagemDiasRequest.SegundaFeira;
-            viagemDia.TercaFeira = atualizarViagemDiasRequest.TercaFeira;
-            viagemDia.QuartaFeira = atualizarViagemDiasRequest.QuartaFeira;
-            viagemDia.QuintaFeira = atualizarViagemDiasRequest.QuintaFeira;
-            viagemDia.SextaFeira = atualizarViagemDiasRequest.SextaFeira;
-            viagemDia.Sabado = atualizarViagemDiasRequest.Sabado;
-            viagemDia.Domingo = atualizarViagemDiasRequest.Domingo;
-            viagemDia.Rota = rota;
-            viagemDia.Usuario = usuario;
+                var viagemdia = new ViagemDia()
+                {
+                    NumeroSemana = numeroSemana,
+                    SegundaFeira = atualizarViagemDiasRequest.SegundaFeira,
+                    TercaFeira = atualizarViagemDiasRequest.TercaFeira,
+                    QuartaFeira = atualizarViagemDiasRequest.QuartaFeira,
+                    QuintaFeira = atualizarViagemDiasRequest.QuintaFeira,
+                    SextaFeira = atualizarViagemDiasRequest.SextaFeira,
+                    Sabado = atualizarViagemDiasRequest.Sabado,
+                    Domingo = atualizarViagemDiasRequest.Domingo,
+                    Rota = rota,
+                    Usuario = usuario
+                };
 
-            this.viagemDiasDao.Atualizar(viagemDia);
+                this.viagemDiasDao.Salvar(viagemdia);
 
-            return new AtualizarViagemDiasResponse(viagemDia);
+                return new SalvarViagemDiasResponse(viagemdia);
+            }
+
+            else
+            {
+                var usuario = this.usuarioDao.Obter(atualizarViagemDiasRequest.UsuarioId);
+                if (usuario == null)
+                    throw new Exception("Nenhum usuario econtrada com esse id");
+
+                var rota = this.rotaDao.Obter(usuario.Rota.Id);
+                if (rota == null)
+                    throw new Exception("Nenhuma rota econtrada com esse id");
+
+                var viagemDia = this.viagemDiasDao.Obter(atualizarViagemDiasRequest.Id);
+                if (viagemDia == null)
+                    throw new Exception("Nenhuma viagem econtrada com esse id");
+
+                viagemDia.SegundaFeira = atualizarViagemDiasRequest.SegundaFeira;
+                viagemDia.TercaFeira = atualizarViagemDiasRequest.TercaFeira;
+                viagemDia.QuartaFeira = atualizarViagemDiasRequest.QuartaFeira;
+                viagemDia.QuintaFeira = atualizarViagemDiasRequest.QuintaFeira;
+                viagemDia.SextaFeira = atualizarViagemDiasRequest.SextaFeira;
+                viagemDia.Sabado = atualizarViagemDiasRequest.Sabado;
+                viagemDia.Domingo = atualizarViagemDiasRequest.Domingo;
+                viagemDia.Rota = rota;
+                viagemDia.Usuario = usuario;
+
+                this.viagemDiasDao.Atualizar(viagemDia);
+
+                return new SalvarViagemDiasResponse(viagemDia);
+            }
+        }
+
+        public static int GetWeekInyear(DateTime date)
+        {
+            CultureInfo ciCurr = CultureInfo.CurrentCulture;
+            int weekNum = ciCurr.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstFourDayWeek, ciCurr.DateTimeFormat.FirstDayOfWeek);
+            return weekNum;
         }
     }
 }

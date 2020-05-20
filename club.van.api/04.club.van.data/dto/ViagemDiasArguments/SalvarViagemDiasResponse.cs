@@ -2,10 +2,10 @@
 
 namespace club.van.api.data.dto.ViagemDiasArguments
 {
-    public class AtualizarViagemDiasResponse
+    public class SalvarViagemDiasResponse
     {
 
-        public AtualizarViagemDiasResponse(ViagemDia viagemDia)
+        public SalvarViagemDiasResponse(ViagemDia viagemDia)
         {
             this.Id = viagemDia.Id;
             this.NumeroSemana = viagemDia.NumeroSemana;
@@ -18,7 +18,6 @@ namespace club.van.api.data.dto.ViagemDiasArguments
             this.Domingo = viagemDia.Domingo;
             this.Rota = viagemDia.Rota;
             this.Usuario = viagemDia.Usuario;
-
         }
 
         public Guid Id { get; set; }

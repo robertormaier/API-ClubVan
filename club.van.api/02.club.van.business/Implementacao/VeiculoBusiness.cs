@@ -14,7 +14,7 @@ namespace club.van.api.business.Implementacao
 
         private IEmpresaDao empresaDao;
 
-        public VeiculoBusiness(IVeiculoDao veiculoDao,IEmpresaDao empresaDao)
+        public VeiculoBusiness(IVeiculoDao veiculoDao, IEmpresaDao empresaDao)
         {
             this.veiculoDao = veiculoDao;
 
@@ -32,7 +32,7 @@ namespace club.van.api.business.Implementacao
                 Descricao = adicionarVeiculoRequest.Descricao,
                 Modelo = adicionarVeiculoRequest.Modelo.ToUpper(),
                 Placa = adicionarVeiculoRequest.Placa.ToUpper(),
-                Empresa =  empresa,
+                Empresa = empresa,
             };
 
             this.veiculoDao.Salvar(veiculo);
@@ -50,8 +50,10 @@ namespace club.van.api.business.Implementacao
             this.veiculoDao.Delete(veiculo);
         }
 
-        public List<Veiculo> ObterTodos(Guid empresaId)
+        public List<Veiculo> ObterTodos(string id)
         {
+            var empresaId = Guid.Parse(id);
+
             return this.veiculoDao.ObterTodos(empresaId);
         }
     }

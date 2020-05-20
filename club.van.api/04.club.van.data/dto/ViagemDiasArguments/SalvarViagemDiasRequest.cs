@@ -2,10 +2,9 @@
 
 namespace club.van.api.data.dto.ViagemDiasArguments
 {
-    public class AtualizarViagemDiasRequest
+    public class SalvarViagemDiasRequest
     {
         public Guid Id { get; set; }
-        public int NumeroSemana { get; set; }
         public bool SegundaFeira { get; set; }
         public bool TercaFeira { get; set; }
         public bool QuartaFeira { get; set; }
@@ -13,7 +12,6 @@ namespace club.van.api.data.dto.ViagemDiasArguments
         public bool SextaFeira { get; set; }
         public bool Sabado { get; set; }
         public bool Domingo { get; set; }
-        public Guid RotaId { get; set; }
         public Guid UsuarioId { get; set; }
     }
 }

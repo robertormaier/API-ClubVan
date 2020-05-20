@@ -7,6 +7,6 @@ namespace club.van.api.data.dto.VeiculoArguments
 {
     public class ObterVeiculoRequest
     {
-        public Guid EmpresaId { get; set; }
+        public string Id { get; set; }
     }
 }

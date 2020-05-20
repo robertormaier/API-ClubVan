@@ -11,7 +11,7 @@ namespace club.van.api.business.Interface
 
         AdicionarViagemDiasResponse AdicionarViagemDia(AdicionarViagemDiasRequest adicionarViagemDiasRequest);
 
-        AtualizarViagemDiasResponse Update(AtualizarViagemDiasRequest atualizarViagemDiasRequest);
+        SalvarViagemDiasResponse Salvar(SalvarViagemDiasRequest atualizarViagemDiasRequest);
 
         void Delete(Guid id);
 

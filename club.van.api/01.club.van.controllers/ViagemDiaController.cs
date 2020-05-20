@@ -66,10 +66,10 @@ namespace club.van.controllers
             }
         }
 
-        [HttpPut]
-        [Route("Update")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Update([FromBody] AtualizarViagemDiasRequest atualizarViagemDiasRequest)
+        [HttpPost]
+        [Route("Salvar")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Salvar([FromBody] SalvarViagemDiasRequest salvarViagemDiasRequest)
         {
             using (var context = new ClubVanContext())
             {
@@ -77,7 +77,7 @@ namespace club.van.controllers
                 {
                     try
                     {
-                        var response = this.viagemDiasBusiness.Update(atualizarViagemDiasRequest);
+                        var response = this.viagemDiasBusiness.Salvar(salvarViagemDiasRequest);
                         dbContextTransaction.Commit();
                         return base.Ok(response);
                     }
