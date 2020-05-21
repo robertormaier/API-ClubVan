@@ -25,13 +25,13 @@ namespace club.van.controllers
         }
 
         [HttpGet]
-        [Route("GetAll/{usuarioId}/{rotaId}/{numeroSemana}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult ObterTodos(Guid usuarioId, Guid rotaId, int numeroSemana)
+        [Route("GetAll/{rotaId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult ObterTodos(Guid rotaId)
         {
             try
             {
-                var response = this.viagemDiasBusiness.ObterTodos(usuarioId, rotaId, numeroSemana);
+                var response = this.viagemDiasBusiness.ObterTodos(rotaId);
                 return base.Ok(response);
             }
             catch (System.Exception e)
@@ -41,27 +41,22 @@ namespace club.van.controllers
             }
         }
 
-        [HttpPost]
-        [Route("Adicionar")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Adicionar([FromBody] AdicionarViagemDiasRequest adicionarViagemDiasRequest)
+        [HttpGet]
+        [Route("ObterByUser/{usuarioId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult ObterByUser(string usuarioId)
         {
             using (var context = new ClubVanContext())
             {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
+                try
                 {
-                    try
-                    {
-                        var response = this.viagemDiasBusiness.AdicionarViagemDia(adicionarViagemDiasRequest);
-                        dbContextTransaction.Commit();
-                        return base.Ok(response);
-                    }
-                    catch (System.Exception e)
-                    {
-                        dbContextTransaction.Rollback();
-                        this.logger.LogInformation($"Erro:{e.Message}");
-                        return BadRequest(e);
-                    }
+                    var response = this.viagemDiasBusiness.ObertByUser(usuarioId);
+                    return base.Ok(response);
+                }
+                catch (System.Exception e)
+                {
+                    this.logger.LogInformation($"Erro:{e.Message}");
+                    return BadRequest(e);
                 }
             }
         }

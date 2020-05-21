@@ -8,6 +8,7 @@ namespace club.van.api.data.dto.UsuarioArguments
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Email { get; set; }
+        public int Numero { get; set; }
         public Guid PerfilId { get; set; }
         public string Senha { get; set; }
         public Guid EmpresaId { get; set; }

@@ -37,7 +37,13 @@ namespace club.van.api.dao.Implementacao
 
         public Usuario Obter(Guid id)
         {
-            return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Id == id);
+            return this.clubVanContext.Usuarios.
+              Include(x => x.Perfil)
+             .Include(x => x.Empresa)
+             .Include(x => x.Rota)
+                 .ThenInclude(rota => rota.Veiculo)
+             .Include(x => x.Rota)
+                 .ThenInclude(rota => rota.Empresa).FirstOrDefault(x => x.Id == id);
         }
 
         public List<Usuario> ObterTodos()

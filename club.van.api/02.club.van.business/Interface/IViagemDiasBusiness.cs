@@ -7,9 +7,9 @@ namespace club.van.api.business.Interface
 {
     public interface IViagemDiasBusiness
     {
-        List<ViagemDia> ObterTodos(Guid usuarioId, Guid rotaId, int numeroSemana);
+        List<PontosResponse> ObterTodos(Guid rotaId);
 
-        AdicionarViagemDiasResponse AdicionarViagemDia(AdicionarViagemDiasRequest adicionarViagemDiasRequest);
+        ViagemDia ObertByUser(string usuarioId);
 
         SalvarViagemDiasResponse Salvar(SalvarViagemDiasRequest atualizarViagemDiasRequest);
 

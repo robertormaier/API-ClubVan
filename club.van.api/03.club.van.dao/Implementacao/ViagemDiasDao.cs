@@ -28,16 +28,80 @@ namespace club.van.dao.Implementacao
             return this.clubVanContext.ViagemDias.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<ViagemDia> ObterTodas(Usuario usuario, Rota rota, int numeroSemana)
+        public List<ViagemDia> ObterTodas(string day, Rota rota, int numeroSemana)
         {
-            return this.clubVanContext.ViagemDias
-                        .Include(x => x.Usuario)
-                        .Include(x => x.Rota)
-                            .ThenInclude(rota => rota.Veiculo)
-                        .Include(x => x.Rota)
-                            .ThenInclude(rota => rota.Empresa)
-                        .Where(x => x.NumeroSemana == numeroSemana && x.Usuario == usuario && x.Rota == rota)
-                        .ToList();
+            switch (day)
+            {
+                case "Monday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.SegundaFeira == true)
+                         .ToList();
+                case "Tuesday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.TercaFeira == true)
+                         .ToList();
+                case "Wednesday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.QuartaFeira == true)
+                         .ToList();
+
+                case "Thursday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.QuintaFeira == true)
+                         .ToList();
+
+                case "Friday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.SextaFeira == true)
+                         .ToList();
+
+                case "Saturday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.Sabado == true)
+                         .ToList();
+
+                case "Sunday":
+                    return this.clubVanContext.ViagemDias
+                         .Include(x => x.Usuario)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Veiculo)
+                         .Include(x => x.Rota)
+                             .ThenInclude(rota => rota.Empresa)
+                         .Where(x => x.NumeroSemana == numeroSemana && x.Rota == rota && x.Domingo == true)
+                         .ToList();
+            }
+
+            return null;
         }
 
         public void Salvar(ViagemDia viagemDias)
@@ -52,5 +116,10 @@ namespace club.van.dao.Implementacao
             this.clubVanContext.SaveChanges();
         }
 
+        public ViagemDia ObterByUser(Usuario usuario)
+        {
+            return this.clubVanContext.ViagemDias.OrderByDescending(n => n.NumeroSemana)
+                .FirstOrDefault(x => x.Usuario == usuario);
+        }
     }
 }

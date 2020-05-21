@@ -2,6 +2,7 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using club.van.api.data.dto.ViagemDiasArguments;
+using Microsoft.AspNetCore.JsonPatch.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -26,35 +27,34 @@ namespace club.van.api.business.Implementacao
             this.viagemDiasDao = viagemDiasDao;
         }
 
-        public AdicionarViagemDiasResponse AdicionarViagemDia(AdicionarViagemDiasRequest adicionarViagemDiasRequest)
-        {
 
-            var usuario = this.usuarioDao.Obter(adicionarViagemDiasRequest.UsuarioId);
+        public ViagemDia ObertByUser(string usuarioId)
+        {
+            var id = Guid.Parse(usuarioId);
+
+            var usuario = this.usuarioDao.Obter(id);
             if (usuario == null)
                 throw new Exception("Nenhum usuario econtrada com esse id");
 
-            var rota = this.rotaDao.Obter(adicionarViagemDiasRequest.RotaId);
-            if (rota == null)
-                throw new Exception("Nenhuma rota econtrada com esse id");
+            var diasQueVou = this.viagemDiasDao.ObterByUser(usuario);
 
-            var viagemdia = new ViagemDia()
+            if (diasQueVou != null)
+                return diasQueVou;
+
+            return new ViagemDia()
             {
-                NumeroSemana = adicionarViagemDiasRequest.NumeroSemana,
-                SegundaFeira = adicionarViagemDiasRequest.SegundaFeira,
-                TercaFeira = adicionarViagemDiasRequest.TercaFeira,
-                QuartaFeira = adicionarViagemDiasRequest.QuartaFeira,
-                QuintaFeira = adicionarViagemDiasRequest.QuintaFeira,
-                SextaFeira = adicionarViagemDiasRequest.SextaFeira,
-                Sabado = adicionarViagemDiasRequest.Sabado,
-                Domingo = adicionarViagemDiasRequest.Domingo,
-                Rota = rota,
-                Usuario = usuario
+                Id = Guid.Empty,
+                NumeroSemana = GetWeekInyear(DateTime.Now),
+                SegundaFeira = false,
+                TercaFeira = false,
+                QuartaFeira = false,
+                QuintaFeira = false,
+                SextaFeira = false,
+                Sabado = false,
+                Domingo = false,
             };
-
-            this.viagemDiasDao.Salvar(viagemdia);
-
-            return new AdicionarViagemDiasResponse(viagemdia.Id);
         }
+
 
         public void Delete(Guid id)
         {
@@ -66,18 +66,35 @@ namespace club.van.api.business.Implementacao
             this.viagemDiasDao.Delete(response);
         }
 
-        public List<ViagemDia> ObterTodos(Guid usuarioId, Guid rotaId, int numeroSemana)
+        public List<PontosResponse> ObterTodos(Guid rotaId)
         {
-            var usuario = this.usuarioDao.Obter(usuarioId);
-            if (usuario == null)
-                throw new Exception("Nenhum usuario econtrada com esse id");
-
             var rota = this.rotaDao.Obter(rotaId);
             if (rota == null)
                 throw new Exception("Nenhuma rota econtrada com esse id");
 
-            return this.viagemDiasDao.ObterTodas(usuario, rota, numeroSemana);
+            var day = DateTime.Now;
 
+            var numeroSemana = GetWeekInyear(day);
+
+            var pontos = this.viagemDiasDao.ObterTodas(day.DayOfWeek.ToString(), rota, numeroSemana);
+
+            var listPontos = new List<PontosResponse>();
+
+            foreach (var item in pontos)
+            {
+                var ponto = new PontosResponse()
+                {
+                    Nome = item.Usuario.Nome,
+                    Logradouro = item.Usuario.Rua,
+                    Numero = "",
+                    Bairro = item.Usuario.Bairro,
+                    Cidade = item.Usuario.Cidade,
+                    Estado = item.Usuario.Uf,
+                };
+
+                listPontos.Add(ponto);
+            }
+            return listPontos;
         }
 
         public SalvarViagemDiasResponse Salvar(SalvarViagemDiasRequest atualizarViagemDiasRequest)
@@ -91,10 +108,6 @@ namespace club.van.api.business.Implementacao
                 var rota = this.rotaDao.Obter(usuario.Rota.Id);
                 if (rota == null)
                     throw new Exception("Nenhuma rota econtrada com esse id");
-
-                var viagemDia = this.viagemDiasDao.Obter(atualizarViagemDiasRequest.Id);
-                if (viagemDia == null)
-                    throw new Exception("Nenhuma viagem econtrada com esse id");
 
                 var numeroSemana = GetWeekInyear(DateTime.Now);
 

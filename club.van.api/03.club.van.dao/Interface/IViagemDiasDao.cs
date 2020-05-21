@@ -8,14 +8,15 @@ namespace club.van.api.dao.Interface
     {
         ViagemDia Obter(Guid id);
 
+        ViagemDia ObterByUser(Usuario usuario);
+
         void Salvar(ViagemDia viagemDias);
 
         void Atualizar(ViagemDia viagemDias);
 
-
         void Delete(ViagemDia viagemDias);
 
-        List<ViagemDia> ObterTodas(Usuario usuario, Rota rota, int numeroSemana);
+        List<ViagemDia> ObterTodas(string day, Rota rota, int numeroSemana);
 
     }
 }
