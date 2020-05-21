@@ -15,7 +15,7 @@ namespace club.van.api.dao.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-4DEOMFG;Initial Catalog=DB_CLUBVAN;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=SQL5053.site4now.net;Initial Catalog=DB_A61B15_rmaier;User Id=DB_A61B15_rmaier_admin;Password=FQx!D@aD!6b!krz;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
