@@ -8,7 +8,7 @@ namespace club.van.api.dao.Interface
     {
         ViagemDia Obter(Guid id);
 
-        ViagemDia ObterByUser(Usuario usuario);
+        ViagemDia ObterByUser(Usuario usuario, int numeroSemana);
 
         void Salvar(ViagemDia viagemDias);
 

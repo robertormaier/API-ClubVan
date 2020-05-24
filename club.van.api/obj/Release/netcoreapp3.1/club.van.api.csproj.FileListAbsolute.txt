@@ -75,3 +75,4 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Release\netcoreapp3.1
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Release\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\bin\Release\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1\club.van.api.csprojAssemblyReference.cache

@@ -36,7 +36,9 @@ namespace club.van.api.business.Implementacao
             if (usuario == null)
                 throw new Exception("Nenhum usuario econtrada com esse id");
 
-            var diasQueVou = this.viagemDiasDao.ObterByUser(usuario);
+            var numeroSemana = GetWeekInyear(DateTime.Now);
+
+            var diasQueVou = this.viagemDiasDao.ObterByUser(usuario, numeroSemana);
 
             if (diasQueVou != null)
                 return diasQueVou;
@@ -44,7 +46,7 @@ namespace club.van.api.business.Implementacao
             return new ViagemDia()
             {
                 Id = Guid.Empty,
-                NumeroSemana = GetWeekInyear(DateTime.Now),
+                NumeroSemana = numeroSemana,
                 SegundaFeira = false,
                 TercaFeira = false,
                 QuartaFeira = false,

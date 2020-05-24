@@ -116,10 +116,10 @@ namespace club.van.dao.Implementacao
             this.clubVanContext.SaveChanges();
         }
 
-        public ViagemDia ObterByUser(Usuario usuario)
+        public ViagemDia ObterByUser(Usuario usuario, int numeroSemana)
         {
             return this.clubVanContext.ViagemDias.OrderByDescending(n => n.NumeroSemana)
-                .FirstOrDefault(x => x.Usuario == usuario);
+                .FirstOrDefault(x => x.Usuario == usuario && x.NumeroSemana == numeroSemana);
         }
     }
 }
