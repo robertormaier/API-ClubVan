@@ -4,6 +4,7 @@ using club.van.api.data;
 using club.van.api.data.dto.UsuarioArguments;
 using System;
 using System.Collections.Generic;
+using System.Net.Mail;
 
 namespace club.van.api.business.Implementacao
 {
@@ -195,9 +196,66 @@ namespace club.van.api.business.Implementacao
             return this.usuarioDao.ObterTodos();
         }
 
-        public Usuario FindByEmail(string email)
+
+        public ResetUsuarioResponse RedefinirSenhaUsuario(ResetUsuarioRequest resetUsuarioRequest)
         {
-            return this.usuarioDao.FindByEmail(email);
+            var usuario = this.usuarioDao.FindByEmail(resetUsuarioRequest.Email);
+            if (usuario == null)
+            {
+                throw new Exception("O usuario informado não existe");
+            }
+            else
+            {
+                var senha = GerarSenha();
+
+                usuario.Senha = this.CalculaHash(senha);
+
+                this.usuarioDao.Atualizar(usuario);
+
+                this.EnviarEmail(senha, resetUsuarioRequest.Email);
+
+                return new ResetUsuarioResponse(usuario.Id);
+            }
+        }
+
+        public string GerarSenha()
+        {
+            int senha = 0;
+
+            Random rd = new Random();
+            for (var i = 0; i < 6; i++)
+            {
+                senha = +rd.Next();
+            }
+            return senha.ToString();
+        }
+
+        public void EnviarEmail(string senha, string email)
+        {
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            client.Credentials = new System.Net.NetworkCredential("robertomaier02@gmail.com", "gvasa1121993");
+            MailMessage mail = new MailMessage();
+            mail.Sender = new System.Net.Mail.MailAddress("robertomaier02@gmail.com", "Club Van");
+            mail.From = new MailAddress("robertomaier02@gmail.com", "Club Van");
+            mail.To.Add(new MailAddress(email, "RECEBEDOR"));
+            mail.Subject = "Sua Senha Foi redefinida";
+            mail.Body = "Sua senha foi redefinida, agora você pode usar essa senha para logar no sistema: " + senha;
+            mail.IsBodyHtml = true;
+            mail.Priority = MailPriority.High;
+            try
+            {
+                client.Send(mail);
+            }
+            catch (System.Exception erro)
+            {
+                //trata erro
+            }
+            finally
+            {
+                mail = null;
+            }
         }
     }
 }

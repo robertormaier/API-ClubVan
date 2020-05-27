@@ -17,9 +17,13 @@ namespace club.van.api.business.Interface
 
         List<Usuario> ObterTodos();
 
-        Usuario FindByEmail(string email);
+        ResetUsuarioResponse RedefinirSenhaUsuario(ResetUsuarioRequest resetUsuarioRequest);
 
         //Metodo Interno
         string CalculaHash(string Senha);
+
+        string GerarSenha();
+
+        void EnviarEmail(string senha, string email);
     }
 }

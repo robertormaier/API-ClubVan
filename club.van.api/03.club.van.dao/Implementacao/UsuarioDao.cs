@@ -74,7 +74,7 @@ namespace club.van.api.dao.Implementacao
 
         public Usuario FindByEmail(string email)
         {
-            return this.clubVanContext.Usuarios.Find(email);
+            return this.clubVanContext.Usuarios.FirstOrDefault(x => x.Email == email);
         }
 
         public void Atualizar(Usuario usuario)

@@ -100,6 +100,31 @@ namespace club.van.api.controllers
             }
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("ResetPassword")]
+        public IActionResult ResetPassword([FromBody] ResetUsuarioRequest resetUsuarioRequest)
+        {
+            using (var context = new ClubVanContext())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.usuarioBusiness.RedefinirSenhaUsuario(resetUsuarioRequest);
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.BadRequest(e);
+                    }
+                }
+            }
+        }
+
         [HttpPut]
         [Route("Update")]
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
