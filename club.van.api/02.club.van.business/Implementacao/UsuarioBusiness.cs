@@ -232,29 +232,39 @@ namespace club.van.api.business.Implementacao
 
         public void EnviarEmail(string senha, string email)
         {
-            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.EnableSsl = true;
-            client.Credentials = new System.Net.NetworkCredential("robertomaier02@gmail.com", "gvasa1121993");
-            MailMessage mail = new MailMessage();
-            mail.Sender = new System.Net.Mail.MailAddress("robertomaier02@gmail.com", "Club Van");
-            mail.From = new MailAddress("robertomaier02@gmail.com", "Club Van");
-            mail.To.Add(new MailAddress(email, "RECEBEDOR"));
-            mail.Subject = "Sua Senha Foi redefinida";
-            mail.Body = "Sua senha foi redefinida, agora você pode usar essa senha para logar no sistema: " + senha;
-            mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
             try
             {
-                client.Send(mail);
+                SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com");
+
+                mySmtpClient.UseDefaultCredentials = false;
+                System.Net.NetworkCredential basicAuthenticationInfo = new
+                   System.Net.NetworkCredential("robertomaier02@gmail.com", "gvasa1121993");
+                mySmtpClient.Credentials = basicAuthenticationInfo;
+
+                MailAddress from = new MailAddress("robertomaier02@gmail.com", "Club Van");
+                MailAddress to = new MailAddress(email, email);
+                MailMessage myMail = new System.Net.Mail.MailMessage(from, to);
+
+                myMail.Subject = "Sua senha foi redefinida";
+                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                myMail.Body = "Sua senha foi redefinida, agora você pode usar essa senha para logar no sistema : " + senha;
+                myMail.BodyEncoding = System.Text.Encoding.UTF8;
+
+                myMail.IsBodyHtml = true;
+                mySmtpClient.EnableSsl = true;
+                mySmtpClient.Send(myMail);
             }
-            catch (System.Exception erro)
+
+            catch (SmtpException ex)
             {
-                //trata erro
+                throw new ApplicationException
+                  ("SmtpException has occured: " + ex.Message);
             }
-            finally
+
+            catch (Exception ex)
             {
-                mail = null;
+                throw ex;
             }
         }
     }
