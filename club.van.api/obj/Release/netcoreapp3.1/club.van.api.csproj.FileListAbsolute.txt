@@ -75,3 +75,4 @@ C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1\club.van.api.dll
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1\club.van.api.pdb
 C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1\club.van.api.genruntimeconfig.cache
+C:\Users\Roberto\source\repos\API-ClubVan\club.van.api\obj\Release\netcoreapp3.1\club.van.api.csprojAssemblyReference.cache

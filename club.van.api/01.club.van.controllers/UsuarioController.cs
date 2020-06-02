@@ -58,8 +58,8 @@ namespace club.van.api.controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("GetAll/{empresaId}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult ObterTodos()
         {
             try
@@ -152,7 +152,7 @@ namespace club.van.api.controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())
@@ -163,7 +163,7 @@ namespace club.van.api.controllers
                     {
                         this.usuarioBusiness.Delete(id);
                         dbContextTransaction.Commit();
-                        return base.Ok();
+                        return base.Ok("Usuario deletado com sucesso");
                     }
                     catch (System.Exception e)
                     {

@@ -68,7 +68,7 @@ namespace club.van.api.controllers
 
         [HttpDelete]
         [Route("Delete/{id}")]
-        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Delete(Guid id)
         {
             using (var context = new ClubVanContext())
@@ -79,7 +79,7 @@ namespace club.van.api.controllers
                     {
                         this.rotaBusiness.Delete(id);
                         dbContextTransaction.Commit();
-                        return base.Ok();
+                        return base.Ok("Rota Deletada com sucesso");
                     }
                     catch (System.Exception e)
                     {
