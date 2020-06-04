@@ -16,7 +16,6 @@ namespace club.van.api.dao.Interface
 
         void Atualizar(Usuario usuario);
 
-
         bool Existe(string email);
 
         void Delete(Usuario usuario);

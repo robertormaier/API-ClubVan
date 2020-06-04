@@ -15,7 +15,9 @@ namespace club.van.api.business.Interface
 
         void Delete(Guid id);
 
-        List<Usuario> ObterTodos();
+        List<Usuario> ObterTodos();   
+        
+        Usuario GetUserById(Guid id);
 
         ResetUsuarioResponse RedefinirSenhaUsuario(ResetUsuarioRequest resetUsuarioRequest);
 

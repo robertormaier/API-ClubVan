@@ -150,10 +150,6 @@ namespace club.van.api.business.Implementacao
             if (perfil == null)
                 throw new Exception("Nenhum perfil econtrado com esse id");
 
-            var empresa = this.empresaDao.Obter(atualizarUsuarioRequest.EmpresaId);
-            if (empresa == null)
-                throw new Exception("Nenhuma empresa econtrada com esse id");
-
             var rota = this.rotaDao.Obter(atualizarUsuarioRequest.RotaId);
             if (rota == null)
                 throw new Exception("Nenhuma rota econtrada com esse id");
@@ -166,10 +162,7 @@ namespace club.van.api.business.Implementacao
             usuario.Nome = atualizarUsuarioRequest.Nome;
             usuario.Cpf = atualizarUsuarioRequest.Cpf;
             usuario.Email = atualizarUsuarioRequest.Email;
-            usuario.Senha = this.CalculaHash(atualizarUsuarioRequest.Senha);
             usuario.Perfil = perfil;
-            usuario.Ativo = atualizarUsuarioRequest.Ativo;
-            usuario.Empresa = empresa;
             usuario.Bairro = atualizarUsuarioRequest.Bairro;
             usuario.Rua = atualizarUsuarioRequest.Rua;
             usuario.Cidade = atualizarUsuarioRequest.Cidade;
@@ -266,6 +259,11 @@ namespace club.van.api.business.Implementacao
             {
                 throw ex;
             }
+        }
+
+        public Usuario GetUserById(Guid id)
+        {
+            return this.usuarioDao.Obter(id);
         }
     }
 }

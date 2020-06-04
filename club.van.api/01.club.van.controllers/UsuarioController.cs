@@ -74,6 +74,23 @@ namespace club.van.api.controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetUserById/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult GetUserById(Guid id)
+        {
+            try
+            {
+                var response = this.usuarioBusiness.GetUserById(id);
+                return base.Ok(response);
+            }
+            catch (System.Exception e)
+            {
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return BadRequest(e);
+            }
+        }
+
         [HttpPost]
         [Route("Adicionar")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -127,7 +144,7 @@ namespace club.van.api.controllers
 
         [HttpPut]
         [Route("Update")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult Update([FromBody] AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
             using (var context = new ClubVanContext())
