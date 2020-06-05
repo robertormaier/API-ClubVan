@@ -61,5 +61,10 @@ namespace club.van.api.business.Implementacao
 
             return this.rotaDao.ObterTodas(empresaid);
         }
+
+        public AtualizarRotaResponse Update(AtualizarRotaRequest atualizarRotaRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

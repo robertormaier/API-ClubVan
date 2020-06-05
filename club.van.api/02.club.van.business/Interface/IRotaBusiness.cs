@@ -12,6 +12,8 @@ namespace club.van.api.business.Interface
 
         AdicionarRotaResponse Adicionar(AdicionarRotaRequest adicionarRotaRequest);
 
+        AtualizarRotaResponse Update(AtualizarRotaRequest atualizarRotaRequest);
+
         void Delete(Guid id);
     }
 }

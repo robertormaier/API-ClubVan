@@ -56,5 +56,10 @@ namespace club.van.api.business.Implementacao
 
             return this.veiculoDao.ObterTodos(empresaId);
         }
+
+        public AtualizarVeiculoResponse Update(AtualizarVeiculoRequest atualizarVeiculoRequest)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

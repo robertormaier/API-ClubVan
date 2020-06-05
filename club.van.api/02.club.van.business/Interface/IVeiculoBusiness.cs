@@ -9,6 +9,8 @@ namespace club.van.api.business.Interface
     {
         AdicionarVeiculoResponse AdicionarVeiculo(AdicionarVeiculoRequest adicionarVeiculoRequest);
 
+        AtualizarVeiculoResponse Update(AtualizarVeiculoRequest atualizarVeiculoRequest);
+
         void Delete(Guid id);
 
         List<Veiculo> ObterTodos(string id);

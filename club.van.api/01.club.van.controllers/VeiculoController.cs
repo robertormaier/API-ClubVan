@@ -67,6 +67,31 @@ namespace club.van.api.controllers
         }
 
 
+        [HttpPut]
+        [Route("Update")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Update([FromBody] AtualizarVeiculoRequest atualizarVeiculoRequest)
+        {
+            using (var context = new ClubVanContext())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var response = this.veiculoBusiness.Update(atualizarVeiculoRequest);
+                        dbContextTransaction.Commit();
+                        return base.Ok(response);
+                    }
+                    catch (System.Exception e)
+                    {
+                        dbContextTransaction.Rollback();
+                        this.logger.LogInformation($"Erro:{e.Message}");
+                        return base.BadRequest(e);
+                    }
+                }
+            }
+        }
+
         [HttpDelete]
         [Route("Delete/{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
