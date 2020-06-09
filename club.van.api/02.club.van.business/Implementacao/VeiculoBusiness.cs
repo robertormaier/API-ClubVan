@@ -59,7 +59,17 @@ namespace club.van.api.business.Implementacao
 
         public AtualizarVeiculoResponse Update(AtualizarVeiculoRequest atualizarVeiculoRequest)
         {
-            throw new NotImplementedException();
+
+            var veiculo = this.veiculoDao.Obter(atualizarVeiculoRequest.Id);
+
+            veiculo.Modelo = atualizarVeiculoRequest.Modelo;
+            veiculo.Placa = atualizarVeiculoRequest.Placa;
+            veiculo.Descricao = atualizarVeiculoRequest.Descricao;
+
+            this.veiculoDao.Salvar(veiculo);
+
+            return new AtualizarVeiculoResponse(veiculo.Id);
+
         }
     }
 }

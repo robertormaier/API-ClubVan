@@ -85,31 +85,5 @@ namespace club.van.controllers
                 }
             }
         }
-
-
-        [HttpDelete]
-        [Route("Delete/{id}")]
-        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Delete(Guid id)
-        {
-            using (var context = new ClubVanContext())
-            {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        this.viagemDiasBusiness.Delete(id);
-                        dbContextTransaction.Commit();
-                        return base.Ok();
-                    }
-                    catch (System.Exception e)
-                    {
-                        dbContextTransaction.Rollback();
-                        this.logger.LogInformation($"Erro:{e.Message}");
-                        return BadRequest(e);
-                    }
-                }
-            }
-        }
     }
 }

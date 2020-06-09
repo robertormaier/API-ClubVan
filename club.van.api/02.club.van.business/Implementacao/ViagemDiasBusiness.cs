@@ -2,7 +2,6 @@
 using club.van.api.dao.Interface;
 using club.van.api.data;
 using club.van.api.data.dto.ViagemDiasArguments;
-using Microsoft.AspNetCore.JsonPatch.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -57,16 +56,6 @@ namespace club.van.api.business.Implementacao
             };
         }
 
-
-        public void Delete(Guid id)
-        {
-            var response = this.viagemDiasDao.Obter(id);
-
-            if (response == null)
-                throw new Exception("O id da viagem informada não existe");
-
-            this.viagemDiasDao.Delete(response);
-        }
 
         public List<PontosResponse> ObterTodos(Guid rotaId)
         {

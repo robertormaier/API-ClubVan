@@ -64,7 +64,15 @@ namespace club.van.api.business.Implementacao
 
         public AtualizarRotaResponse Update(AtualizarRotaRequest atualizarRotaRequest)
         {
-            throw new NotImplementedException();
+            var rota = this.rotaDao.Obter(atualizarRotaRequest.Id);
+
+            var veiculo = this.veiculoDao.Obter(atualizarRotaRequest.Id);
+
+            rota.Nome = atualizarRotaRequest.Nome;
+            rota.Veiculo = veiculo;
+
+
+            return new AtualizarRotaResponse(rota.Id);
         }
     }
 }

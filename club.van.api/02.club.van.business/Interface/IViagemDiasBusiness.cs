@@ -13,7 +13,5 @@ namespace club.van.api.business.Interface
 
         SalvarViagemDiasResponse Salvar(SalvarViagemDiasRequest atualizarViagemDiasRequest);
 
-        void Delete(Guid id);
-
     }
 }

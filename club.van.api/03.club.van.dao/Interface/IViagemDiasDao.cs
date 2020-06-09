@@ -14,8 +14,6 @@ namespace club.van.api.dao.Interface
 
         void Atualizar(ViagemDia viagemDias);
 
-        void Delete(ViagemDia viagemDias);
-
         List<ViagemDia> ObterTodas(string day, Rota rota, int numeroSemana);
 
     }

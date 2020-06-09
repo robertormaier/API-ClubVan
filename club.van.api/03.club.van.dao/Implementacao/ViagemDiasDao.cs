@@ -17,11 +17,6 @@ namespace club.van.dao.Implementacao
             this.clubVanContext = clubVanContext;
         }
 
-        public void Delete(ViagemDia viagemDia)
-        {
-            this.clubVanContext.ViagemDias.Remove(viagemDia);
-            this.clubVanContext.SaveChanges();
-        }
 
         public ViagemDia Obter(Guid id)
         {
