@@ -13,5 +13,7 @@ namespace club.van.api.dao.Interface
         void Salvar(Rota rota);
 
         void Delete(Rota rota);
+
+        void  Atualizar(Rota rota);
     }
 }

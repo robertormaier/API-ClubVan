@@ -66,6 +66,22 @@ namespace club.van.api.controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetRotaById/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult GetUserById(Guid id)
+        {
+            try
+            {
+                var response = this.rotaBusiness.GetRotaById(id);
+                return base.Ok(response);
+            }
+            catch (System.Exception e)
+            {
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return BadRequest(e);
+            }
+        }
 
         [HttpPut]
         [Route("Update")]

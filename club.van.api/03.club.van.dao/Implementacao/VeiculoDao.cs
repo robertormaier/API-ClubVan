@@ -41,5 +41,11 @@ namespace club.van.api.dao.Implementacao
             this.clubVanContext.Veiculos.Remove(veiculo);
             this.clubVanContext.SaveChanges();
         }
+
+        public void Atualizar(Veiculo veiculo)
+        {
+            this.clubVanContext.Veiculos.Update(veiculo);
+            this.clubVanContext.SaveChanges();
+        }
     }
 }

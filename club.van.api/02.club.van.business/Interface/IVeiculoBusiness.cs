@@ -15,5 +15,6 @@ namespace club.van.api.business.Interface
 
         List<Veiculo> ObterTodos(string id);
 
+        Veiculo GetVeiculoById(Guid id);
     }
 }

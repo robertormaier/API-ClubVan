@@ -50,6 +50,11 @@ namespace club.van.api.business.Implementacao
             this.veiculoDao.Delete(veiculo);
         }
 
+        public Veiculo GetVeiculoById(Guid id)
+        {
+            return this.veiculoDao.Obter(id);
+        }
+
         public List<Veiculo> ObterTodos(string id)
         {
             var empresaId = Guid.Parse(id);
@@ -59,17 +64,15 @@ namespace club.van.api.business.Implementacao
 
         public AtualizarVeiculoResponse Update(AtualizarVeiculoRequest atualizarVeiculoRequest)
         {
-
             var veiculo = this.veiculoDao.Obter(atualizarVeiculoRequest.Id);
 
             veiculo.Modelo = atualizarVeiculoRequest.Modelo;
             veiculo.Placa = atualizarVeiculoRequest.Placa;
             veiculo.Descricao = atualizarVeiculoRequest.Descricao;
 
-            this.veiculoDao.Salvar(veiculo);
+            this.veiculoDao.Atualizar(veiculo);
 
             return new AtualizarVeiculoResponse(veiculo.Id);
-
         }
     }
 }

@@ -216,7 +216,7 @@ namespace club.van.api.business.Implementacao
             int senha = 0;
 
             Random rd = new Random();
-            for (var i = 0; i < 6; i++)
+            for (var i = 0; i < 4 ; i++)
             {
                 senha = +rd.Next();
             }

@@ -92,6 +92,24 @@ namespace club.van.api.controllers
             }
         }
 
+        [HttpGet]
+        [Route("GetVeiculoById/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult GetUserById(Guid id)
+        {
+            try
+            {
+                var response = this.veiculoBusiness.GetVeiculoById(id);
+                return base.Ok(response);
+            }
+            catch (System.Exception e)
+            {
+                this.logger.LogInformation($"Erro:{e.Message}");
+                return BadRequest(e);
+            }
+        }
+
+
         [HttpDelete]
         [Route("Delete/{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

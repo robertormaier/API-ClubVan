@@ -13,5 +13,7 @@ namespace club.van.api.dao.Interface
         void Salvar(Veiculo veiculo);
 
         void Delete(Veiculo veiculo);
+
+        void Atualizar(Veiculo veiculo);
     }
 }

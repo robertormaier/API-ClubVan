@@ -19,7 +19,10 @@ namespace club.van.api.dao.Implementacao
 
         public Rota Obter(Guid id)
         {
-            return this.clubVanContext.Rotas.FirstOrDefault(x => x.Id == id);
+            return this.clubVanContext.Rotas.
+                            Include(x => x.Veiculo)
+                           .Include(x => x.Empresa)
+                           .FirstOrDefault(x => x.Id == id);
         }
 
         public List<Rota> ObterTodas(Guid empresaId)
@@ -39,6 +42,12 @@ namespace club.van.api.dao.Implementacao
         public void Delete(Rota rota)
         {
             this.clubVanContext.Rotas.Remove(rota);
+            this.clubVanContext.SaveChanges();
+        }
+
+        public void Atualizar(Rota rota)
+        {
+            this.clubVanContext.Rotas.Update(rota);
             this.clubVanContext.SaveChanges();
         }
     }

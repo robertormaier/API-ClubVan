@@ -55,6 +55,11 @@ namespace club.van.api.business.Implementacao
             this.rotaDao.Delete(rota);
         }
 
+        public Rota GetRotaById(Guid id)
+        {
+           return this.rotaDao.Obter(id);
+        }
+
         public List<Rota> ObterTodas(string empresaId)
         {
             var empresaid = Guid.Parse(empresaId);
@@ -66,11 +71,12 @@ namespace club.van.api.business.Implementacao
         {
             var rota = this.rotaDao.Obter(atualizarRotaRequest.Id);
 
-            var veiculo = this.veiculoDao.Obter(atualizarRotaRequest.Id);
+            var veiculo = this.veiculoDao.Obter(atualizarRotaRequest.VeiculoId);
 
             rota.Nome = atualizarRotaRequest.Nome;
             rota.Veiculo = veiculo;
 
+            this.rotaDao.Atualizar(rota);
 
             return new AtualizarRotaResponse(rota.Id);
         }
