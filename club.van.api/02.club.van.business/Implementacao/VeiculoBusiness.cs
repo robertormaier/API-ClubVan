@@ -10,20 +10,20 @@ namespace club.van.api.business.Implementacao
     public class VeiculoBusiness : IVeiculoBusiness
     {
 
-        private IVeiculoDao veiculoDao;
+        private IVeiculoDao _veiculoDao;
 
-        private IEmpresaDao empresaDao;
+        private IEmpresaDao _empresaDao;
 
         public VeiculoBusiness(IVeiculoDao veiculoDao, IEmpresaDao empresaDao)
         {
-            this.veiculoDao = veiculoDao;
+            _veiculoDao = veiculoDao;
 
-            this.empresaDao = empresaDao;
+            _empresaDao = empresaDao;
         }
 
         public AdicionarVeiculoResponse AdicionarVeiculo(AdicionarVeiculoRequest adicionarVeiculoRequest)
         {
-            var empresa = this.empresaDao.Obter(adicionarVeiculoRequest.EmpresaId);
+            var empresa = _empresaDao.Obter(adicionarVeiculoRequest.EmpresaId);
             if (empresa == null)
                 throw new Exception("Nenhuma empresa econtrada com esse id");
 
@@ -35,42 +35,42 @@ namespace club.van.api.business.Implementacao
                 Empresa = empresa,
             };
 
-            this.veiculoDao.Salvar(veiculo);
+            _veiculoDao.Salvar(veiculo);
 
             return new AdicionarVeiculoResponse(veiculo.Id);
         }
 
         public void Delete(Guid id)
         {
-            var veiculo = this.veiculoDao.Obter(id);
+            var veiculo = _veiculoDao.Obter(id);
 
             if (veiculo == null)
                 throw new Exception("Nenhum veiculo encontrado");
 
-            this.veiculoDao.Delete(veiculo);
+            _veiculoDao.Delete(veiculo);
         }
 
         public Veiculo GetVeiculoById(Guid id)
         {
-            return this.veiculoDao.Obter(id);
+            return _veiculoDao.Obter(id);
         }
 
         public List<Veiculo> ObterTodos(string id)
         {
             var empresaId = Guid.Parse(id);
 
-            return this.veiculoDao.ObterTodos(empresaId);
+            return _veiculoDao.ObterTodos(empresaId);
         }
 
         public AtualizarVeiculoResponse Update(AtualizarVeiculoRequest atualizarVeiculoRequest)
         {
-            var veiculo = this.veiculoDao.Obter(atualizarVeiculoRequest.Id);
+            var veiculo = _veiculoDao.Obter(atualizarVeiculoRequest.Id);
 
             veiculo.Modelo = atualizarVeiculoRequest.Modelo;
             veiculo.Placa = atualizarVeiculoRequest.Placa;
             veiculo.Descricao = atualizarVeiculoRequest.Descricao;
 
-            this.veiculoDao.Atualizar(veiculo);
+            _veiculoDao.Atualizar(veiculo);
 
             return new AtualizarVeiculoResponse(veiculo.Id);
         }

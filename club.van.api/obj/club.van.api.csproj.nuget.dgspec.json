@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {}
+    "C:\\Users\\Roberto Maier\\Documents\\Laboratorio\\DotNet\\API-ClubVan\\club.van.api\\club.van.api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj": {
+    "C:\\Users\\Roberto Maier\\Documents\\Laboratorio\\DotNet\\API-ClubVan\\club.van.api\\club.van.api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
+        "projectUniqueName": "C:\\Users\\Roberto Maier\\Documents\\Laboratorio\\DotNet\\API-ClubVan\\club.van.api\\club.van.api.csproj",
         "projectName": "club.van.api",
-        "projectPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\club.van.api.csproj",
-        "packagesPath": "C:\\Users\\Roberto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Roberto\\source\\repos\\API-ClubVan\\club.van.api\\obj\\",
+        "projectPath": "C:\\Users\\Roberto Maier\\Documents\\Laboratorio\\DotNet\\API-ClubVan\\club.van.api\\club.van.api.csproj",
+        "packagesPath": "C:\\Users\\Roberto Maier\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Roberto Maier\\Documents\\Laboratorio\\DotNet\\API-ClubVan\\club.van.api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Roberto\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Roberto Maier\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -29,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -40,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
@@ -82,7 +81,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

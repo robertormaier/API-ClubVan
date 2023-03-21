@@ -9,76 +9,84 @@ namespace club.van.api.business.Implementacao
 {
     public class RotaBusiness : IRotaBusiness
     {
-        private IRotaDao rotaDao;
-
-        private IVeiculoDao veiculoDao;
-
-        private IEmpresaDao empresaDao;
-
+        private readonly IRotaDao _rotaDao;
+        private readonly IVeiculoDao _veiculoDao;
+        private readonly IEmpresaDao _empresaDao;
 
         public RotaBusiness(IRotaDao rotaDao, IVeiculoDao veiculoDao, IEmpresaDao empresaDao)
         {
-            this.rotaDao = rotaDao;
-            this.veiculoDao = veiculoDao;
-            this.empresaDao = empresaDao;
+            _rotaDao = rotaDao;
+            _veiculoDao = veiculoDao;
+            _empresaDao = empresaDao;
         }
 
         public AdicionarRotaResponse Adicionar(AdicionarRotaRequest adicionarRotaRequest)
         {
-            var veiculo = this.veiculoDao.Obter(adicionarRotaRequest.VeiculoId);
+            var veiculo = _veiculoDao.Obter(adicionarRotaRequest.VeiculoId);
             if (veiculo == null)
-                throw new Exception("Nenhum Veiculo econtrado com esse id");
+            {
+                throw new ArgumentException("Nenhum Veiculo encontrado com este ID");
+            }
 
-            var empresa = this.empresaDao.Obter(adicionarRotaRequest.EmpresaId);
+            var empresa = _empresaDao.Obter(adicionarRotaRequest.EmpresaId);
             if (empresa == null)
-                throw new Exception("Nenhuma empresa econtrada com esse id");
+            {
+                throw new ArgumentException("Nenhuma empresa encontrada com este ID");
+            }
 
-            var rota = new Rota()
+            var rota = new Rota
             {
                 Nome = adicionarRotaRequest.Nome,
                 Empresa = empresa,
                 Veiculo = veiculo
             };
 
-            this.rotaDao.Salvar(rota);
+            _rotaDao.Salvar(rota);
 
             return new AdicionarRotaResponse(rota.Id);
         }
 
         public void Delete(Guid id)
         {
-            var rota = this.rotaDao.Obter(id);
+            var rota = _rotaDao.Obter(id);
 
             if (rota == null)
-                throw new Exception("Nenhuma Rota encontrada");
+            {
+                throw new ArgumentException("Nenhuma Rota encontrada com este ID");
+            }
 
-            this.rotaDao.Delete(rota);
+            _rotaDao.Delete(rota);
         }
 
         public Rota GetRotaById(Guid id)
         {
-           return this.rotaDao.Obter(id);
+            return _rotaDao.Obter(id);
         }
 
         public List<Rota> ObterTodas(string empresaId)
         {
-            var empresaid = Guid.Parse(empresaId);
+            var empresaGuid = Guid.Parse(empresaId);
 
-            return this.rotaDao.ObterTodas(empresaid);
+            return _rotaDao.ObterTodas(empresaGuid);
         }
 
         public AtualizarRotaResponse Update(AtualizarRotaRequest atualizarRotaRequest)
         {
-            var rota = this.rotaDao.Obter(atualizarRotaRequest.Id);
+            var rota = _rotaDao.Obter(atualizarRotaRequest.Id);
 
-            var veiculo = this.veiculoDao.Obter(atualizarRotaRequest.VeiculoId);
+            var veiculo = _veiculoDao.Obter(atualizarRotaRequest.VeiculoId);
+            if (veiculo == null)
+            {
+                throw new ArgumentException("Nenhum Veiculo encontrado com este ID");
+            }
 
             rota.Nome = atualizarRotaRequest.Nome;
             rota.Veiculo = veiculo;
 
-            this.rotaDao.Atualizar(rota);
+            _rotaDao.Atualizar(rota);
 
             return new AtualizarRotaResponse(rota.Id);
         }
     }
+
 }

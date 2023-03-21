@@ -4,12 +4,14 @@ using club.van.api.data.dto.UsuarioArguments;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace club.van.api.controllers
 {
@@ -97,23 +99,19 @@ namespace club.van.api.controllers
         public IActionResult Adicionar([FromBody] AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
 
-            using (var context = new ClubVanContext())
+            using var context = new ClubVanContext();
+            using var dbContextTransaction = context.Database.BeginTransaction();
+            try
             {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        var response = this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
-                        dbContextTransaction.Commit();
-                        return base.Ok(response);
-                    }
-                    catch (System.Exception e)
-                    {
-                        dbContextTransaction.Rollback();
-                        this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.BadRequest(e);
-                    }
-                }
+                var response = this.usuarioBusiness.AdicionarUsuario(adicionarUsuarioRequest);
+                dbContextTransaction.Commit();
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                dbContextTransaction.Rollback();
+                logger.LogInformation($"Erro: {e.Message}");
+                return BadRequest(e);
             }
         }
 
@@ -122,25 +120,20 @@ namespace club.van.api.controllers
         [Route("ResetPassword")]
         public IActionResult ResetPassword([FromBody] ResetUsuarioRequest resetUsuarioRequest)
         {
-            using (var context = new ClubVanContext())
+            try
             {
-                using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        var response = this.usuarioBusiness.RedefinirSenhaUsuario(resetUsuarioRequest);
-                        dbContextTransaction.Commit();
-                        return base.Ok(response);
-                    }
-                    catch (System.Exception e)
-                    {
-                        dbContextTransaction.Rollback();
-                        this.logger.LogInformation($"Erro:{e.Message}");
-                        return base.BadRequest(e);
-                    }
-                }
+                var response = this.usuarioBusiness.ResetUserPassword(resetUsuarioRequest);
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                logger.LogError($"An error occurred while resetting the user password: {e.Message}");
+
+                return BadRequest(e);
             }
         }
+
 
         [HttpPut]
         [Route("Update")]

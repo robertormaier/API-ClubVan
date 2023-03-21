@@ -19,10 +19,10 @@ namespace club.van.api.business.Interface
         
         Usuario GetUserById(Guid id);
 
-        ResetUsuarioResponse RedefinirSenhaUsuario(ResetUsuarioRequest resetUsuarioRequest);
+        ResetUsuarioResponse ResetUserPassword(ResetUsuarioRequest resetUsuarioRequest);
 
         //Metodo Interno
-        string CalculaHash(string Senha);
+        string CalculateHash(string Senha);
 
         string GerarSenha();
 

@@ -4,7 +4,9 @@ using club.van.api.data;
 using club.van.api.data.dto.UsuarioArguments;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace club.van.api.business.Implementacao
 {
@@ -31,133 +33,115 @@ namespace club.van.api.business.Implementacao
 
         public AdicionarUsuarioResponse AdicionarUsuario(AdicionarUsuarioRequest adicionarUsuarioRequest)
         {
-            if (this.ValidarUsuario(adicionarUsuarioRequest))
+            var perfil = perfilDao.Obter(adicionarUsuarioRequest.PerfilId)
+                ?? throw new Exception("Nenhum perfil encontrado com esse id");
+
+            var empresa = empresaDao.Obter(adicionarUsuarioRequest.EmpresaId)
+                ?? throw new Exception("Nenhuma empresa encontrada com esse id");
+
+            var rota = rotaDao.Obter(adicionarUsuarioRequest.RotaId)
+                ?? throw new Exception("Nenhuma rota encontrada com esse id");
+
+            var usuario = new Usuario
             {
-                var perfil = this.perfilDao.Obter(adicionarUsuarioRequest.PerfilId);
-                if (perfil == null)
-                    throw new Exception("Nenhum perfil econtrado com esse id");
+                Nome = adicionarUsuarioRequest.Nome,
+                Cpf = adicionarUsuarioRequest.Cpf,
+                Email = adicionarUsuarioRequest.Email,
+                Senha = CalculateHash(adicionarUsuarioRequest.Senha),
+                Perfil = perfil,
+                Ativo = true,
+                Empresa = empresa,
+                Bairro = adicionarUsuarioRequest.Bairro,
+                Rua = adicionarUsuarioRequest.Rua,
+                Cidade = adicionarUsuarioRequest.Cidade,
+                Uf = adicionarUsuarioRequest.Uf,
+                Rota = rota,
+            };
 
-                var empresa = this.empresaDao.Obter(adicionarUsuarioRequest.EmpresaId);
-                if (empresa == null)
-                    throw new Exception("Nenhuma empresa econtrada com esse id");
-
-                var rota = this.rotaDao.Obter(adicionarUsuarioRequest.RotaId);
-                if (rota == null)
-                    throw new Exception("Nenhuma rota econtrada com esse id");
-
-
-                var usuario = new Usuario();
-                {
-                    usuario.Nome = adicionarUsuarioRequest.Nome;
-                    usuario.Cpf = adicionarUsuarioRequest.Cpf;
-                    usuario.Email = adicionarUsuarioRequest.Email;
-                    usuario.Senha = this.CalculaHash(adicionarUsuarioRequest.Senha);
-                    usuario.Perfil = perfil;
-                    usuario.Ativo = true;
-                    usuario.Empresa = empresa;
-                    usuario.Bairro = adicionarUsuarioRequest.Bairro;
-                    usuario.Rua = adicionarUsuarioRequest.Rua;
-                    usuario.Cidade = adicionarUsuarioRequest.Cidade;
-                    usuario.Uf = adicionarUsuarioRequest.Uf;
-                    usuario.Rota = rota;
-                }
-
-                this.usuarioDao.Salvar(usuario);
-
-                return new AdicionarUsuarioResponse(usuario.Id);
+            if (!ValidarUsuario(adicionarUsuarioRequest))
+            {
+                throw new Exception("Não foi possível adicionar o usuário");
             }
 
-            throw new Exception("Não foi possivel adicionar o usuário");
+            usuarioDao.Salvar(usuario);
+
+            return new AdicionarUsuarioResponse(usuario.Id);
         }
 
         public Usuario AutenticarUsuario(string email, string senha)
         {
-            var senhaHash = this.CalculaHash(senha);
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
+                return null;
+
+            var senhaHash = CalculateHash(senha);
 
             var response = this.usuarioDao.Obter(email, senhaHash);
 
-            if (response == null)
-                return null;
-            else
-                return response;
+            return response?.Id != null ? response : null;
         }
 
-        private bool ValidarUsuario(AdicionarUsuarioRequest AdicionarUsuarioRequest)
+
+        private bool ValidarUsuario(AdicionarUsuarioRequest request)
         {
-            if (AdicionarUsuarioRequest.Nome == null)
-                throw new Exception("Nome não pode ser vazio");
+            var errorMessage = new StringBuilder();
+            if (string.IsNullOrEmpty(request.Nome))
+                errorMessage.AppendLine("Nome não pode ser vazio");
+            if (string.IsNullOrEmpty(request.Cpf))
+                errorMessage.AppendLine("Cpf não pode ser vazio");
+            if (string.IsNullOrEmpty(request.Email))
+                errorMessage.AppendLine("Email não pode ser vazio");
+            if (string.IsNullOrEmpty(request.Senha))
+                errorMessage.AppendLine("Senha não pode ser vazia");
+            if (request.PerfilId == null)
+                errorMessage.AppendLine("Nome não pode ser vazio");
+            if (request.EmpresaId == null)
+                errorMessage.AppendLine("Empresa não pode ser vazia");
+            if (string.IsNullOrEmpty(request.Bairro))
+                errorMessage.AppendLine("Bairro não pode ser vazio");
+            if (string.IsNullOrEmpty(request.Rua))
+                errorMessage.AppendLine("Rua não pode ser vazia");
+            if (string.IsNullOrEmpty(request.Cidade))
+                errorMessage.AppendLine("Cidade não pode ser vazia");
+            if (string.IsNullOrEmpty(request.Uf))
+                errorMessage.AppendLine("UF não pode ser vazia");
+            if (request.RotaId == null)
+                errorMessage.AppendLine("Rota não pode ser vazia");
 
-            if (AdicionarUsuarioRequest.Cpf == null)
-                throw new Exception("Cpf não pode ser vazio");
+            if (errorMessage.Length > 0)
+                throw new ArgumentNullException(errorMessage.ToString());
 
-            if (AdicionarUsuarioRequest.Email == null)
-                throw new Exception("Email não pode ser vazio");
-
-            if (AdicionarUsuarioRequest.Senha == null)
-                throw new Exception("Senha não pode ser vazia");
-
-            if (AdicionarUsuarioRequest.PerfilId == null)
-                throw new Exception("Nome não pode ser vazio");
-
-            if (AdicionarUsuarioRequest.EmpresaId == null)
-                throw new Exception("Empresa não pode ser vazia");
-
-            if (AdicionarUsuarioRequest.Bairro == null)
-                throw new Exception("Bairro não pode ser vazio");
-
-            if (AdicionarUsuarioRequest.Rua == null)
-                throw new Exception("Rua não pode ser vazia");
-
-            if (AdicionarUsuarioRequest.Cidade == null)
-                throw new Exception("Cidade não pode ser vazia");
-
-            if (AdicionarUsuarioRequest.Uf == null)
-                throw new Exception("UF não pode ser vazia");
-
-            if (AdicionarUsuarioRequest.RotaId == null)
-                throw new Exception("Rota não pode ser vazia");
-
-            else
-                return true;
+            return true;
         }
 
-        public string CalculaHash(string Senha)
+
+        public string CalculateHash(string senha)
         {
-            try
+            using var md5 = System.Security.Cryptography.MD5.Create();
+            var inputBytes = System.Text.Encoding.ASCII.GetBytes(senha);
+            var hash = md5.ComputeHash(inputBytes);
+            var sb = new System.Text.StringBuilder();
+            foreach (var h in hash)
             {
-                System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
-                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(Senha);
-                byte[] hash = md5.ComputeHash(inputBytes);
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                for (int i = 0; i < hash.Length; i++)
-                {
-                    sb.Append(hash[i].ToString("X2"));
-                }
-                return sb.ToString();
+                sb.Append(h.ToString("X2"));
             }
-            catch (Exception)
-            {
-                return null;
-            }
+            return sb.ToString();
         }
 
         public AtualizarUsuarioResponse Update(AtualizarUsuarioRequest atualizarUsuarioRequest)
         {
             if (atualizarUsuarioRequest.Id == Guid.Empty)
-                throw new Exception("O id não pode estar vazio");
+            {
+                throw new ArgumentException("O id não pode estar vazio", nameof(atualizarUsuarioRequest));
+            }
 
-            var perfil = this.perfilDao.Obter(atualizarUsuarioRequest.PerfilId);
-            if (perfil == null)
-                throw new Exception("Nenhum perfil econtrado com esse id");
+            var perfil = perfilDao.Obter(atualizarUsuarioRequest.PerfilId)
+                ?? throw new ArgumentException("Nenhum perfil encontrado com esse id", nameof(atualizarUsuarioRequest));
 
-            var rota = this.rotaDao.Obter(atualizarUsuarioRequest.RotaId);
-            if (rota == null)
-                throw new Exception("Nenhuma rota econtrada com esse id");
+            var rota = rotaDao.Obter(atualizarUsuarioRequest.RotaId)
+                ?? throw new ArgumentException("Nenhuma rota encontrada com esse id", nameof(atualizarUsuarioRequest));
 
-            var usuario = this.usuarioDao.Obter(atualizarUsuarioRequest.Id);
-            if (usuario == null)
-                throw new Exception("Nenhuma usuario econtrada com esse id");
-
+            var usuario = usuarioDao.Obter(atualizarUsuarioRequest.Id)
+                ?? throw new ArgumentException("Nenhuma usuário encontrado com esse id", nameof(atualizarUsuarioRequest));
 
             usuario.Nome = atualizarUsuarioRequest.Nome;
             usuario.Cpf = atualizarUsuarioRequest.Cpf;
@@ -169,57 +153,48 @@ namespace club.van.api.business.Implementacao
             usuario.Uf = atualizarUsuarioRequest.Uf;
             usuario.Rota = rota;
 
-            this.usuarioDao.Atualizar(usuario);
+            usuarioDao.Atualizar(usuario);
 
             return new AtualizarUsuarioResponse(usuario);
         }
 
         public void Delete(Guid id)
         {
-            var response = this.usuarioDao.Obter(id);
-
-            if (response == null)
-                throw new Exception("O usuario informado não existe");
-
-            this.usuarioDao.Delete(response);
+            var usuario = usuarioDao.Obter(id) ?? throw new ArgumentException("O usuário informado não existe", nameof(id));
+            usuarioDao.Delete(usuario);
         }
 
         public List<Usuario> ObterTodos()
         {
-            return this.usuarioDao.ObterTodos();
+            return usuarioDao.ObterTodos();
         }
 
-
-        public ResetUsuarioResponse RedefinirSenhaUsuario(ResetUsuarioRequest resetUsuarioRequest)
+        public ResetUsuarioResponse ResetUserPassword(ResetUsuarioRequest resetUsuarioRequest)
         {
-            var usuario = this.usuarioDao.FindByEmail(resetUsuarioRequest.Email);
-            if (usuario == null)
-            {
-                throw new Exception("O usuario informado não existe");
-            }
-            else
-            {
-                var senha = GerarSenha();
+            var usuario = usuarioDao.FindByEmail(resetUsuarioRequest.Email)
+                ?? throw new ArgumentException("O usuário informado não existe", nameof(resetUsuarioRequest));
 
-                usuario.Senha = this.CalculaHash(senha);
+            var senha = GerarSenha();
 
-                this.usuarioDao.Atualizar(usuario);
+            usuario.Senha = CalculateHash(senha);
 
-                this.EnviarEmail(senha, resetUsuarioRequest.Email);
+            usuarioDao.Atualizar(usuario);
 
-                return new ResetUsuarioResponse(usuario.Id);
-            }
+            EnviarEmail(senha, resetUsuarioRequest.Email);
+
+            return new ResetUsuarioResponse(usuario.Id);
         }
 
         public string GerarSenha()
         {
-            int senha = 0;
+            var senha = 0;
+            var rd = new Random();
 
-            Random rd = new Random();
-            for (var i = 0; i < 4 ; i++)
+            for (var i = 0; i < 4; i++)
             {
-                senha = +rd.Next();
+                senha += rd.Next();
             }
+
             return senha.ToString();
         }
 
@@ -227,39 +202,34 @@ namespace club.van.api.business.Implementacao
         {
             try
             {
-                SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com");
-
-                mySmtpClient.UseDefaultCredentials = false;
-                System.Net.NetworkCredential basicAuthenticationInfo = new
-                   System.Net.NetworkCredential("robertomaier02@gmail.com", "gvasa1121993");
-                mySmtpClient.Credentials = basicAuthenticationInfo;
-
-                MailAddress from = new MailAddress("robertomaier02@gmail.com", "Club Van");
-                MailAddress to = new MailAddress(email, email);
-                MailMessage myMail = new System.Net.Mail.MailMessage(from, to);
-
-                myMail.Subject = "Sua senha foi redefinida";
-                myMail.SubjectEncoding = System.Text.Encoding.UTF8;
-
-                myMail.Body = "Sua senha foi redefinida, agora você pode usar essa senha para logar no sistema : " + senha;
-                myMail.BodyEncoding = System.Text.Encoding.UTF8;
-
-                myMail.IsBodyHtml = true;
+                using var mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
+                mySmtpClient.Credentials = new NetworkCredential("robertomaier02@gmail.com", "");
                 mySmtpClient.EnableSsl = true;
+
+                var from = new MailAddress("robertomaier02@gmail.com", "Club Van");
+                var to = new MailAddress(email, email);
+
+                using var myMail = new MailMessage(from, to)
+                {
+                    Subject = "Sua senha foi redefinida",
+                    SubjectEncoding = Encoding.UTF8,
+                    Body = $"Sua senha foi redefinida, agora você pode usar essa senha para logar no sistema: {senha}",
+                    BodyEncoding = Encoding.UTF8,
+                    IsBodyHtml = true
+                };
+
                 mySmtpClient.Send(myMail);
             }
-
             catch (SmtpException ex)
             {
-                throw new ApplicationException
-                  ("SmtpException has occured: " + ex.Message);
+                throw new ApplicationException($"SmtpException has occured: {ex.Message}");
             }
-
             catch (Exception ex)
             {
-                throw ex;
+                throw;
             }
         }
+
 
         public Usuario GetUserById(Guid id)
         {

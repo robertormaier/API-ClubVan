@@ -9,21 +9,16 @@ namespace club.van.api.business.Implementacao
     public class PerfilBusiness : IPerfilBusiness
     {
 
-        private IPerfilDao perfilDao;
+        private IPerfilDao _perfilDao;
 
         public PerfilBusiness(IPerfilDao perfilDao)
         {
-            this.perfilDao = perfilDao;
+            _perfilDao = perfilDao;
         }
 
         public List<Perfil> ObterTodos()
         {
-            var response = this.perfilDao.ObterTodos();
-
-            if (response == null)
-                throw new Exception("Nenhum perfil encontrado");
-
-            return response;
+            return _perfilDao.ObterTodos() ?? throw new Exception("Nenhum perfil encontrado");
         }
     }
 }
